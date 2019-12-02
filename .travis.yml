@@ -1,0 +1,24 @@
+language: python
+
+python:
+    - 3.7
+
+# Handle git submodules yourself
+git:
+    submodules: false
+
+# Use sed to replace the SSH URL with the public URL, then initialize submodules
+before_install:
+    - sed -i 's/git@github.com:/https:\/\/github.com\//' .gitmodules
+    - git submodule update --init --recursive
+
+install:
+    - pip install coveralls
+    - pip install mecab-python3
+
+script:
+    - coverage run --rcfile=.coveragerc setup.py test
+    - coverage run --rcfile=.coveragerc src/main.py -osdi --forcemecab
+
+after_success:
+    - coveralls
