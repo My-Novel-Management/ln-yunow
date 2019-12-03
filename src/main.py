@@ -6,13 +6,23 @@ import sys
 sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
 sys.path.append('storybuilder')
 from storybuilder.builder.world import World
+from storybuilder.common.times import COMMON_TIMES
 from config import PERSONS, CHARAS, STAGES, DAYS, TIMES, ITEMS, WORDS
+from src.demo import ep_demo
+
+
+## chapters
+def ch_demo(w: World):
+    return w.chapter("Demo",
+            ep_demo(w),
+            )
 
 ## main
 def world():
     """Create a world.
     """
-    w = World("")
+    w = World(2)
+    w.set_times(COMMON_TIMES)
     w.set_db(PERSONS, CHARAS,
             STAGES, DAYS, TIMES,
             ITEMS,
@@ -20,7 +30,8 @@ def world():
     return w
 
 def story(w: World):
-    return w.story("Sample",
+    return w.story("勇者なう！",
+            ch_demo(w),
             )
 
 def main(): # pragma: no cover
