@@ -1,12 +1,42 @@
-# novel-project-template
+# 勇者なう！
 
-A template for develop novels
+勇者は　スマフを　てにいれた！
 
-## after must do
+## Abstract
 
-_Need to add git submodule (storybuilder)_
+王様に呼び出されて勇者に任命された若者は、勇者の装備と共にスマフという最新型の魔法具を手に入れる。
+しかしそれは勇者にとって災難の始まりでしかなかった。
 
-_Need to overwrite this readme_
+## Data
+
+- Title: 勇者なう！
+- Copy: 勇者だってスマフしたいんです
+- Theme: 現代のSNS含めたネット事情の揶揄
+- Genre: Fantasy/Hero/Satire
+- Target: 10-20years (man)
+- Size: 120K
+- Music: "オーバーロード" by OST／MYTH & ROID
+
+## Concept
+
+_「勇者の世界にSNSがあったら」_
+
+数多出版されている勇者と魔王のいる世界の冒険もの。その中には現代的なSNSを持ち込んだものもあるだろう。
+ただどちらかといえば「転生した現代人がSNSなどの知識を用いて無双」のようなものが多い。
+そうではなく、魔法を用いてSNSを準備し、それを使えるようにしてしまったらどうか。
+これはそんな発想で生み出された作品である。
+道具は人を豊かにもするが、駄目にもする。
+これはそんなメリットデメリットを面白おかしく、時に涙もあって、描く、SNS的冒険譚である。
+
+## Vision
+
+ゴブリンやオーク、ドラゴンが跋扈する平野で、必死に甲冑まとった勇者がスマホを触っている
+「おい！　ここWifiないやん！」と叫ぶのである。
+
+## System
+
+OnePersonTPS（基本的に勇者の単一視点的）
+How-done-it（どのようにして解決？）
 
 ---
 (C)2019 N.T.Works
