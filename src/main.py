@@ -10,6 +10,7 @@ from storybuilder.common.times import COMMON_TIMES
 from config import PERSONS, CHARAS, STAGES, DAYS, TIMES, ITEMS, WORDS
 from src.demo.demo import ep_demo
 from src.demo.maouconfess import ep_demo_confess
+from src.demo.yushamaou import ep_demo_yusha_is_maou
 
 
 ## chapters
@@ -52,6 +53,7 @@ def ch_burnout(w: World):
 
 def ch_heroismaou(w: World):
     return w.chapter("勇者が魔王なう",
+            ep_demo_yusha_is_maou(w),
             )
 
 def ch_maou_coming(w: World):
