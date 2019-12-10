@@ -9,6 +9,7 @@ from storybuilder.builder.world import World
 from storybuilder.common.times import COMMON_TIMES
 from config import PERSONS, CHARAS, STAGES, DAYS, TIMES, ITEMS, WORDS
 from src.demo.demo import ep_demo
+from src.demo.maouconfess import ep_demo_confess
 
 
 ## chapters
@@ -55,6 +56,7 @@ def ch_heroismaou(w: World):
 
 def ch_maou_coming(w: World):
     return w.chapter("魔王降臨なう",
+            ep_demo_confess(w),
             )
 
 ## main
