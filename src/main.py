@@ -17,6 +17,7 @@ from src.demo.goblin1 import ep_demo_goblinnest
 from src.demo.goblin2 import ep_demo_bustergoblin
 from src.demo.maouconfess import ep_demo_confess
 from src.demo.popular import ep_demo_popular
+from src.demo.yusha import ep_demo_yushanow
 from src.demo.yushamaou import ep_demo_yusha_is_maou
 
 
@@ -28,6 +29,7 @@ def ch_demo(w: World):
 
 def ch_Iamhero(w: World):
     return w.chapter("勇者なう",
+            ep_demo_yushanow(w),
             )
 
 def ch_gatherally(w: World):
