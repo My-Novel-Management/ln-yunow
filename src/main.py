@@ -9,6 +9,7 @@ from storybuilder.builder.world import World
 from storybuilder.common.times import COMMON_TIMES
 from config import PERSONS, CHARAS, STAGES, DAYS, TIMES, ITEMS, WORDS
 from src.demo.demo import ep_demo
+from src.demo.alldead import ep_demo_alldead
 from src.demo.burnout import ep_demo_burnout
 from src.demo.channel import ep_demo_channel
 from src.demo.goblin1 import ep_demo_goblinnest
@@ -34,6 +35,7 @@ def ch_gatherally(w: World):
 
 def ch_destruction(w: World):
     return w.chapter("全滅なう",
+            ep_demo_alldead(w),
             )
 
 def ch_adventurechannel(w: World):
