@@ -9,6 +9,7 @@ from storybuilder.builder.world import World
 from storybuilder.common.times import COMMON_TIMES
 from config import PERSONS, CHARAS, STAGES, DAYS, TIMES, ITEMS, WORDS
 from src.demo.demo import ep_demo
+from src.demo.burnout import ep_demo_burnout
 from src.demo.maouconfess import ep_demo_confess
 from src.demo.yushamaou import ep_demo_yusha_is_maou
 
@@ -16,7 +17,7 @@ from src.demo.yushamaou import ep_demo_yusha_is_maou
 ## chapters
 def ch_demo(w: World):
     return w.chapter("Demo",
-            ep_demo(w),
+            ep_demo(w).omit(),
             )
 
 def ch_Iamhero(w: World):
@@ -49,6 +50,7 @@ def ch_popularman(w: World):
 
 def ch_burnout(w: World):
     return w.chapter("炎上なう",
+            ep_demo_burnout(w),
             )
 
 def ch_heroismaou(w: World):
