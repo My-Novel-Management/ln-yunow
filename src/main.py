@@ -10,6 +10,7 @@ from storybuilder.common.times import COMMON_TIMES
 from config import PERSONS, CHARAS, STAGES, DAYS, TIMES, ITEMS, WORDS
 from src.demo.demo import ep_demo
 from src.demo.burnout import ep_demo_burnout
+from src.demo.goblin2 import ep_demo_bustergoblin
 from src.demo.maouconfess import ep_demo_confess
 from src.demo.popular import ep_demo_popular
 from src.demo.yushamaou import ep_demo_yusha_is_maou
@@ -43,6 +44,7 @@ def ch_goblin1(w: World):
 
 def ch_goblin2(w: World):
     return w.chapter("ゴブリンの巣なう・２",
+            ep_demo_bustergoblin(w),
             )
 
 def ch_popularman(w: World):
