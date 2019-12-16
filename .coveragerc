@@ -1,6 +1,7 @@
 # .coveragerc to control coverage.py
 [run]
-source = src
+source =
+    src
 omit =
     # projects
     old_*
