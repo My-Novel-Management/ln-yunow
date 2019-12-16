@@ -29,52 +29,52 @@ def ch_demo(w: World):
 
 def ch_Iamhero(w: World):
     return w.chapter("勇者なう",
-            ep_demo_yushanow(w),
+            ep_demo_yushanow(w).omit(),
             )
 
 def ch_gatherally(w: World):
     return w.chapter("仲間なう",
-            ep_demo_ally(w),
+            ep_demo_ally(w).omit(),
             )
 
 def ch_destruction(w: World):
     return w.chapter("全滅なう",
-            ep_demo_alldead(w),
+            ep_demo_alldead(w).omit(),
             )
 
 def ch_adventurechannel(w: World):
     return w.chapter("冒険チャンネルなう",
-            ep_demo_channel(w),
+            ep_demo_channel(w).omit(),
             )
 
 def ch_goblin1(w: World):
     return w.chapter("ゴブリンの巣なう・１",
-            ep_demo_goblinnest(w),
+            ep_demo_goblinnest(w).omit(),
             )
 
 def ch_goblin2(w: World):
     return w.chapter("ゴブリンの巣なう・２",
-            ep_demo_bustergoblin(w),
+            ep_demo_bustergoblin(w).omit(),
             )
 
 def ch_popularman(w: World):
     return w.chapter("人気者なう",
-            ep_demo_popular(w),
+            ep_demo_popular(w).omit(),
             )
 
 def ch_burnout(w: World):
     return w.chapter("炎上なう",
-            ep_demo_burnout(w),
+            ep_demo_burnout(w).omit(),
             )
 
 def ch_heroismaou(w: World):
     return w.chapter("勇者が魔王なう",
-            ep_demo_yusha_is_maou(w),
+            ep_demo_yusha_is_maou(w).omit(),
             )
 
 def ch_maou_coming(w: World):
     return w.chapter("魔王降臨なう",
-            ep_demo_confess(w),
+            ep_demo_confess(w).omit(),
             )
 
 ## main
