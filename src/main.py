@@ -19,6 +19,9 @@ from src.demo.maouconfess import ep_demo_confess
 from src.demo.popular import ep_demo_popular
 from src.demo.yusha import ep_demo_yushanow
 from src.demo.yushamaou import ep_demo_yusha_is_maou
+from src.maoucoming.epigloue import ep_epilogue
+from src.maoucoming.maju_gacha import ep_gacha
+from src.maoucoming.maouconfess import ep_confession
 
 
 ## chapters
@@ -75,6 +78,13 @@ def ch_heroismaou(w: World):
 def ch_maou_coming(w: World):
     return w.chapter("魔王降臨なう",
             ep_demo_confess(w).omit(),
+            # NOTE:
+            #   魔王告白
+            #   世界の再構築を
+            #   勇者の許し、冒険はこれからだ
+            ep_confession(w),
+            ep_gacha(w),
+            ep_epilogue(w),
             )
 
 ## main
