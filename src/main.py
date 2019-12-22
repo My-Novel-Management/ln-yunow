@@ -19,6 +19,9 @@ from src.demo.maouconfess import ep_demo_confess
 from src.demo.popular import ep_demo_popular
 from src.demo.yusha import ep_demo_yushanow
 from src.demo.yushamaou import ep_demo_yusha_is_maou
+from src.heroismaou.birthdaemon import ep_birth_daemon
+from src.heroismaou.fakenews import ep_fakenews
+from src.heroismaou.stayindoor import ep_yusha_indoor
 from src.maoucoming.epigloue import ep_epilogue
 from src.maoucoming.maju_gacha import ep_gacha
 from src.maoucoming.maouconfess import ep_confession
@@ -73,6 +76,13 @@ def ch_burnout(w: World):
 def ch_heroismaou(w: World):
     return w.chapter("勇者が魔王なう",
             ep_demo_yusha_is_maou(w).omit(),
+            # NOTE:
+            #   フェイクニュースで勇者が魔王だったとして更に炎上
+            #   勇者は隠れ家に引きこもる
+            #   ヘイトの魔獣誕生、魔子が「話がある」と言い出す
+            ep_fakenews(w),
+            ep_yusha_indoor(w),
+            ep_birth_daemon(w),
             )
 
 def ch_maou_coming(w: World):
