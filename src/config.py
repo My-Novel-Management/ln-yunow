@@ -36,8 +36,13 @@ PERSONS = (
         ("maju", "魔獣", "", 99, (1,1), "male", "ヘイトの魔獣", "me:我"),
         )
 
+AREAS = (
+        # Tag / 名前 / x,y / 備考
+        ("Nethgard", "ネスガルド", 1000,1000),
+        )
+
 STAGES = (
-        # Tag / 名前 / 紹介
+        # Tag / 名前 / Area / 紹介
         )
 
 DAYS = (
@@ -58,7 +63,7 @@ WORDS = (
         )
 
 RUBIS = (
-        # Base / Rubi / Type
+        # Base / Rubi / Exclusion / Type
         )
 
 LAYERS = (

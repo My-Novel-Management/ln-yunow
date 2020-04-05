@@ -8,13 +8,18 @@ sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
 sys.path.append('storybuilder')
 ## local libs
 from storybuilder.builder.world import World
-from storybuilder.assets import basic
+from storybuilder.builder.writer import Writer
+## assets
+from storybuilder.assets import basic, accessory
 ## settings
-from src.config import PERSONS, STAGES, DAYS, TIMES, ITEMS, WORDS, RUBIS, LAYERS
+from src.config import PERSONS, AREAS, STAGES, DAYS, TIMES, ITEMS, WORDS, RUBIS, LAYERS
 ## local files
 
+## define alias
+W = Writer
 
-## NOTE:
+################################################################
+##  章構成
 ##  1. 勇者なう
 ##  2. 仲間なう
 ##  3. 準備なう
@@ -25,6 +30,7 @@ from src.config import PERSONS, STAGES, DAYS, TIMES, ITEMS, WORDS, RUBIS, LAYERS
 ##  8. 人気者なう
 ##  9. 炎上なう
 ##  10. 魔王なう
+################################################################
 
 
 ## main
@@ -34,14 +40,15 @@ def create_world():
     w = World("勇者なう！")
     w.setCommonData()
     w.setAssets(basic.ASSET)
+    w.setAssets(accessory.ASSET)
     w.buildDB(PERSONS,
-            STAGES, DAYS, TIMES, ITEMS, WORDS,
+            AREAS, STAGES, DAYS, TIMES, ITEMS, WORDS,
             RUBIS, LAYERS)
     w.setBaseDate(1020)
+    w.setBaseArea("Nethgard")
     # set persons
     # set stages
     # set blocks
-    # set outline
     w.setOutline("スマフと呼ばれる魔法具を手に入れた勇者はそれを使って魔王退治に繰り出すはずだったが、何故か魔物たちに取り囲まれてしまう")
     return w
 
