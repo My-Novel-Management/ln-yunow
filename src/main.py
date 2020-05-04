@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """Main story.
 """
@@ -14,6 +15,16 @@ from storybuilder.assets import basic, accessory
 ## settings
 from src.config import PERSONS, AREAS, STAGES, DAYS, TIMES, ITEMS, WORDS, RUBIS, LAYERS
 ## local files
+from src.c1_iamhero.main import ch01
+from src.c2_gatherally.main import ch02
+from src.c3_preparation.main import ch03
+from src.c4_destruction.main import ch04
+from src.c5_adv_channel.main import ch05
+from src.c6_goblin1.main import ch06
+from src.c7_goblin2.main import ch07
+from src.c8_popularman.main import ch08
+from src.c9_burnout.main import ch09
+from src.c10_maoucoming.main import ch10
 
 ## define alias
 W = Writer
@@ -55,6 +66,16 @@ def create_world():
 def main(): # pragma: no cover
     w = create_world()
     return w.build(
+            ch01(w),
+            ch02(w),
+            ch03(w),
+            ch04(w),
+            ch05(w),
+            ch06(w),
+            ch07(w),
+            ch08(w),
+            ch09(w),
+            ch10(w),
             )
 
 
