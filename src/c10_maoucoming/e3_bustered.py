@@ -20,6 +20,7 @@ _ = W.getWho()
 def sc_maju_and_game(w: World):
     hero, mako, sol, yula = W(w.hero), W(w.mako), W(w.sol), W(w.yula)
     maju = W(w.maju)
+    inside, outside = W(w.inside), W(w.outside)
     return w.scene("魔獣とゲーム",
             hero.be(),
             mako.be(),
@@ -49,6 +50,7 @@ def sc_maju_and_game(w: World):
 def sc_gacha(w: World):
     hero, mako, sol, yula = W(w.hero), W(w.mako), W(w.sol), W(w.yula)
     maju = W(w.maju)
+    inside, outside = W(w.inside), W(w.outside)
     return w.scene("魔獣ガチャ",
             hero.be(),
             mako.be(),
@@ -77,6 +79,7 @@ def sc_gacha(w: World):
 def sc_bustermaju(w: World):
     hero, mako, sol, yula = W(w.hero), W(w.mako), W(w.sol), W(w.yula)
     maju = W(w.maju)
+    inside, outside = W(w.inside), W(w.outside)
     return w.scene("魔獣消える",
             maju.do("どんどん縮んでいく"),
             sol.do("$w_majuを倒しに向かうが"),

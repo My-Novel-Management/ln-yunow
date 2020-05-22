@@ -19,8 +19,10 @@ _ = W.getWho()
 ## scenes
 def sc_runaway(w: World):
     hero, mako, sol, yula = W(w.hero), W(w.mako), W(w.sol), W(w.yula)
+    inside, outside = W(w.inside), W(w.outside)
     return w.scene("逃げ惑う勇者",
             hero.be("目覚めたら、森の中"),
+            outside.look("古い女神像が見える"),
             yula.talk("何してんの？　さっさと行くよ"),
             hero.talk("は、はい"),
             hero.do("再び逃げていた"),
@@ -31,6 +33,8 @@ def sc_runaway(w: World):
             mako.talk("大丈夫ですよ。ちょっと疲れてるだけです",
                 "それより、あそこみたいです"),
             hero.do("$yulaの隠れ家が見えてくる"),
+            stage=w.on_jihanforest,
+            day=w.in_reset6, time=w.at_morning,
             )
 
 def sc_hideout(w: World):
@@ -50,6 +54,8 @@ def sc_hideout(w: World):
             hero.talk("$yulaのは？"),
             yula.talk("こういう時に備えていくつも持ってるの"),
             yula.do("$smaphを見ながら作戦会議を"),
+            stage=w.on_yulahideout_int,
+            time=w.at_morning,
             )
 
 def sc_meeting(w: World):
@@ -77,6 +83,7 @@ def sc_meeting(w: World):
 
 def sc_apology(w: World):
     hero, mako, sol, yula = W(w.hero), W(w.mako), W(w.sol), W(w.yula)
+    inside, outside = W(w.inside), W(w.outside)
     return w.scene("勇者の謝罪",
             hero.do("みんなの制止を振り切り、謝罪動画を投稿する$S"),
             sol.talk("いいぞー"),
@@ -112,6 +119,7 @@ def sc_apology(w: World):
 def sc_birthmaju(w: World):
     hero, mako, sol, yula = W(w.hero), W(w.mako), W(w.sol), W(w.yula)
     maju = W(w.maju)
+    inside, outside = W(w.inside), W(w.outside)
     return w.scene("ヘイトの魔獣誕生",
             hero.do("空が真っ暗になり、暗黒の雷が大地に落ちるのをみんな見た"),
             hero.do("それぞれの$smaphが発光する"),

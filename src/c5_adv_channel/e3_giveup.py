@@ -19,13 +19,20 @@ _ = W.getWho()
 ## scenes
 def sc_challenging(w: World):
     hero, mako, sol, yula = W(w.hero), W(w.mako), W(w.sol), W(w.yula)
+    inside, outside = W(w.inside), W(w.outside)
     return w.scene("チャレンジ",
+            hero.be(),
             hero.do("配信を始めた$Sだったが、全く視聴数が増えない"),
+            sol.come(),
+            sol.talk("おーい、今日もやんのか？"),
             hero.talk("なんでなんだ？"),
             sol.talk("いや、見りゃ分かるだろ？",
                 "何が面白いんだ？", "お前の家にあるもの紹介したり、",
                 "隣のおっさん紹介したり、",
                 "一体誰が見たい？"),
+            mako.come(),
+            mako.talk("$k_hero"),
+            mako.talk("二人して言い合いですか？"),
             hero.talk("だって$meが見たやつはそれでみんな爆笑だったし"),
             sol.talk("既に人気のやつがやるのと、無名のお前がやるんじゃ全然違うだろ？",
                 "例えばあのアイドルの$yuiちゃんなら市場歩いてるだけでみんな見るよ",
@@ -35,10 +42,13 @@ def sc_challenging(w: World):
             hero.do("$makoに服を借りて女装放送をしようとする"),
             mako.talk("流石にそれはやめてください"),
             hero.do("だが即座に否定された"),
+            stage=w.on_heroroom_int,
+            day=w.in_working4, time=w.at_afternoon,
             )
 
 def sc_dangerousfood(w: World):
     hero, mako, sol, yula = W(w.hero), W(w.mako), W(w.sol), W(w.yula)
+    inside, outside = W(w.inside), W(w.outside)
     return w.scene("危険な食べ物",
             hero.do("次の企画ということで『ゲテモノ食い』が上がった"),
             hero.talk("これ？"),
@@ -65,8 +75,12 @@ def sc_dangerousfood(w: World):
 
 def sc_stopstreaming(w: World):
     hero, mako, sol, yula = W(w.hero), W(w.mako), W(w.sol), W(w.yula)
+    clerc, malta = W(w.clerc), W(w.malta)
+    inside, outside = W(w.inside), W(w.outside)
     return w.scene("そして配信をやめた",
             hero.be("目覚めると再び教会だった"),
+            clerc.be(),
+            malta.be(),
             hero.do("もう$slimeは食わん！"),
             hero.do("家に戻ると、$solが待機していた"),
             sol.talk("今日はどうするんだ？", "全然視聴数増えないぞ"),
@@ -78,6 +92,8 @@ def sc_stopstreaming(w: World):
             hero.think("案内所で言われたことを思い出す"),
             hero.talk("よし、$w_questを受ける！",
                 "冒険者として稼ぐんだ！"),
+            stage=w.on_church1_int,
+            day=w.in_reset4, time=w.at_afternoon,
             )
 
 ## episode

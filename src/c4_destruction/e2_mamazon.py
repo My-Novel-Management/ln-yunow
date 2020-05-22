@@ -19,7 +19,11 @@ _ = W.getWho()
 ## scenes
 def sc_usemamazon(w: World):
     hero, mako, sol, yula = W(w.hero), W(w.mako), W(w.sol), W(w.yula)
+    inside, outside = W(w.inside), W(w.outside)
     return w.scene("$w_amazonを使う",
+            hero.be(),
+            sol.be(),
+            mako.be(),
             hero.do("$makoに教わって$w_amazonを使ってみることにした"),
             mako.talk("ここにいっぱい並んでる商品が、全部買えるんです",
                 "買ったら自動的に配達までしてくれるんですよ",
@@ -44,11 +48,17 @@ def sc_usemamazon(w: World):
                 "気になるんだったら魔王退治した賞金で返してくれればいいですから"),
             hero.talk("ああ、そういうことなら"),
             hero.do("こうして口座を教えた"),
+            stage=w.on_heroroom_int,
+            time=w.at_night,
             )
 
 def sc_variousorder(w: World):
     hero, mako, sol, yula = W(w.hero), W(w.mako), W(w.sol), W(w.yula)
+    inside, outside = W(w.inside), W(w.outside)
     return w.scene("無茶苦茶な注文",
+            hero.be(),
+            sol.be(),
+            mako.be(),
             hero.talk("よし、これで何でも注文できるぞ！"),
             hero.do("高級な道具、キャンプ用品などをまとめて注文する"),
             hero.do("続々と商品が家に届く"),
@@ -62,7 +72,11 @@ def sc_variousorder(w: World):
 
 def sc_finishready(w: World):
     hero, mako, sol, yula = W(w.hero), W(w.mako), W(w.sol), W(w.yula)
+    inside, outside = W(w.inside), W(w.outside)
     return w.scene("準備完了",
+            hero.be(),
+            sol.be(),
+            mako.be(),
             hero.do("荷物を送り、準備完了して、ほっとしている"),
             mako.talk("おつかれさまです", "はい、紅茶をどうぞ"),
             hero.do("いつの間にか部屋は貴族風に"),

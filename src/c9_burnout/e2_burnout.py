@@ -19,8 +19,12 @@ _ = W.getWho()
 ## scenes
 def sc_heroismaou(w: World):
     hero, mako, sol, yula = W(w.hero), W(w.mako), W(w.sol), W(w.yula)
-    inside = W(w.inside)
+    inside, outside = W(w.inside), W(w.outside)
     return w.scene("勇者が魔王",
+            hero.be(),
+            sol.be(),
+            inside.look("屋根裏の物置",
+                "藁がベッド代わりに敷かれている"),
             hero.do("$Sが魔王ということになり、世界中でデモが起こっていた"),
             hero.do("その様子がどんどん$smaphに流れてくるのを見て、$Sは震えている"),
             sol.talk("おーい、飯"),
@@ -34,20 +38,27 @@ def sc_heroismaou(w: World):
                 "家は魔法でバリアを張って守っててもこのままだと炎上不可避です"),
             mako.do("何度も火をつけられたり、ゴミを投げ込まれたりしている"),
             hero.talk("$meが何したっていうんだよ！"),
+            stage=w.on_solroom_int,
+            day=w.in_demodays, time=w.at_night,
             )
 
 def sc_reporting(w: World):
     hero, mako, sol, yula = W(w.hero), W(w.mako), W(w.sol), W(w.yula)
     sold = W(w.soldier)
     doyle, candy = W(w.doyle), W(w.candy)
+    inside, outside = W(w.inside), W(w.outside)
     return w.scene("通報しました",
+            hero.be(),
             hero.do("目を覚ますと、一人しかいない"),
             hero.do("ドアのノックを聞いて「開いてるよ」というと、知らない人が入ってくる"),
             hero.talk("え？"),
+            sold.come(),
             sold.talk("あなたに逮捕状が出ています"),
             hero.do("兵士に取り囲まれる"),
             hero.talk("いや、$me何もやってないから！"),
+            candy.be(),
             candy.do("こわがって怯えている"),
+            doyle.come(),
             doyle.talk("すまんが通報させてもらった"),
             sol.talk("なんで$meまで？"),
             sol.do("捕まえられている"),
@@ -56,10 +67,12 @@ def sc_reporting(w: World):
 def sc_becaught(w: World):
     hero, mako, sol, yula = W(w.hero), W(w.mako), W(w.sol), W(w.yula)
     sold = W(w.soldier)
+    inside, outside = W(w.inside), W(w.outside)
     return w.scene("捕まる",
             hero.be(),
             sol.be(),
             hero.do("牢屋にぶちこまれた$Sと$sol"),
+            inside.look("冷たく暗い地下牢"),
             sol.talk("なんで$meまで巻き添えなんだよ"),
             hero.talk("あ、でもここにいればひょっとしたら安全かも",
                 "だって外歩いてて石投げられたりしないもんな"),
@@ -79,11 +92,17 @@ def sc_becaught(w: World):
             mako.talk("転移魔法できちゃいました", "一緒に逃げましょう",
                 "あ、$solさんはその格好で表から出ます？"),
             sol.talk("なんでだよ！　$meも一緒に連れてけ！"),
+            stage=w.on_castleprison_int,
+            day=w.in_prison1, time=w.at_night,
             )
 
 def sc_hideandseek(w: World):
     hero, mako, sol, yula = W(w.hero), W(w.mako), W(w.sol), W(w.yula)
+    inside, outside = W(w.inside), W(w.outside)
     return w.scene("地獄のかくれんぼ",
+            hero.be(),
+            sol.be(),
+            mako.be(),
             hero.do("$makoにより、近隣の森の中に連れてきてもらう"),
             yula.be("待っていて"),
             yula.do("$smaphで情報確認をしている"),
@@ -98,10 +117,13 @@ def sc_hideandseek(w: World):
             hero.do("あばれる$S"),
             yula.talk("とにかく黙ってて。バレたら殺されるわよ？"),
             hero.talk("はい"),
+            stage=w.on_jihanforest,
+            day=w.in_outprison, time=w.at_morning,
             )
 
 def sc_runaway(w: World):
     hero, mako, sol, yula = W(w.hero), W(w.mako), W(w.sol), W(w.yula)
+    inside, outside = W(w.inside), W(w.outside)
     return w.scene("逃げる",
             hero.do("森をみんなで抜ける"),
             hero.do("道中、いろいろと見つかりそうになる"),

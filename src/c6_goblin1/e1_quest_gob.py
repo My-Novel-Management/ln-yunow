@@ -17,14 +17,56 @@ _ = W.getWho()
 
 
 ## scenes
+def sc_re_seriousworking(w: World):
+    hero, mako, sol, yula = W(w.hero), W(w.mako), W(w.sol), W(w.yula)
+    mam = W(w.mam)
+    inside, outside = W(w.inside), W(w.outside)
+    return w.scene("やっぱ真面目に働こう",
+            hero.be(),
+            sol.be(),
+            mako.be(),
+            mam.be(),
+            hero.explain("三人で集まって金策の相談をしていた"),
+            mam.talk("$meはこれがいいと思うのよねえ"),
+            hero.talk("なんでここにいるんだよ！　さっさと出てってくれ！"),
+            mam.talk("じゃあ、みんな仲良くね"),
+            mam.go("出ていく"),
+            hero.talk("全く。ゆだんもすきもない"),
+            sol.do("アルバイト雑誌を手に読みふけっている"),
+            mako.talk("これはダメなんですか？"),
+            hero.do("$Sが見ていた$smaphの画面に実況で儲けよう的な宣伝が流れている"),
+            hero.talk("あ、いや、それはいいや"),
+            mako.talk("そうなですか？　なんか$k_hero好きそうだと思ったのに"),
+            hero.talk("まあ、いろいろあって……それよりもだ、やっぱり地道に稼ぐべきだと思うんだ"),
+            sol.talk("それじゃあ$meが仕事を紹介"),
+            hero.talk("それはお断りします"),
+            sol.talk("なんでだよ！"),
+            hero.talk("どうせ工事現場とか農作業とかだろ？"),
+            sol.talk("働くっつったらそういうもんだろ？"),
+            hero.explain("チャンネル配信で儲からないことが分かった$Sたちは、何とか地道に稼ごうと街のギルド本部に向かうことにした"),
+            camera=w.hero,
+            stage=w.on_heroroom_int,
+            day=w.in_reset4, time=w.at_night,
+            )
+
 def sc_money_quest(w: World):
     hero, mako, sol, yula = W(w.hero), W(w.mako), W(w.sol), W(w.yula)
+    mam = W(w.mam)
     inside, outside = W(w.inside), W(w.outside)
     rucca = W(w.rucca)
     return w.scene("クエストで金稼ぎ",
-            hero.do("チャンネル配信で儲からないことが分かった$Sたちは、何とか地道に稼ごうと街のギルド本部に来ていた"),
+            hero.come(),
+            sol.come(),
+            mako.come(),
+            hero.explain("翌朝、三人はギルド本部にやってくる"),
+            inside.look("巨大な建物"),
+            inside.look("それなりに人がいる",
+                "内面は赤レンガ作り",
+                "あちこちにテーブルが出され、書類を書いている人たち"),
             rucca.be("受付に子どもみたいな女性が座っている"),
             hero.talk("あのー、クエスト受けたいんですけど、受付の人いる？"),
+            rucca.look("小柄な娘が受付に座っている",
+                "おかっぱ頭の金髪で、よだれかけみたいな前掛けをして"),
             rucca.talk("こほん", "$meが受付ですが"),
             hero.talk("え？"),
             hero.do("思わず$makoを見る"),
@@ -49,18 +91,29 @@ def sc_money_quest(w: World):
                 "そうでないと受理できません"),
             hero.talk("だってさ", "どうする？"),
             hero.do("相談しあい、結局手短なクエストからやることにした"),
-            camera=w.hero,
-            stage=w.on_castletown1,
-            day=w.in_current, time=w.at_afternoon,
+            stage=w.on_guildhead_int,
+            day=w.in_quest1, time=w.at_midmorning,
             )
 
 def sc_lessmoney(w: World):
     hero, mako, sol, yula = W(w.hero), W(w.mako), W(w.sol), W(w.yula)
+    inside, outside = W(w.inside), W(w.outside)
     return w.scene("稼ぎが少ない",
+            hero.be("働いている"),
+            sol.be(),
             hero.do("結局$Sたちが受けたのは家の補修工事や棚作り、",
                 "畑を耕したり、野生の獣を追い払ったりという、",
                 "雑用ばかりだった"),
-            hero.do("ほうぼう終えて、戻ってくる"),
+            stage=w.on_farm1,
+            time=w.at_afternoon,
+            )
+
+def sc_moremoney(w: World):
+    hero, mako, sol, yula = W(w.hero), W(w.mako), W(w.sol), W(w.yula)
+    inside, outside = W(w.inside), W(w.outside)
+    return w.scene("もっと稼ぎたい",
+            hero.come("ほうぼう終えて、戻ってくる"),
+            mako.be(),
             mako.talk("あ、おかえりなさいませ、$hero様"),
             mako.do("テーブルの上に美味しそうなお菓子を置いて、寛いでいる$S"),
             hero.talk("あー、ちっとも儲からない！"),
@@ -68,13 +121,21 @@ def sc_lessmoney(w: World):
             sol.talk("何倒れてんだ？"),
             sol.look("日に焼けていい顔", "筋肉質になっている"),
             sol.talk("やっぱ$me、冒険者よりこっちの方が合ってんのかな"),
-            hero.talk("$meは農民にはなりたくなーい！"),
+            hero.explain("そんな日々が三日経過した"),
+            hero.talk("$meは農民にはなりたくなーい！",
+                "やっぱまともなクエスト受けるぞ！"),
+            stage=w.on_herohome,
+            time=w.at_evening,
             )
 
 def sc_quest_goblin(w: World):
     hero, mako, sol, yula = W(w.hero), W(w.mako), W(w.sol), W(w.yula)
     rucca = W(w.rucca)
+    inside, outside = W(w.inside), W(w.outside)
     return w.scene("$goblin討伐クエスト",
+            hero.come(),
+            sol.come(),
+            mako.come(),
             hero.do("再度、ギルド本部にやってきてクエストを探す$Sたち"),
             hero.talk("やっぱこれじゃないかな"),
             hero.do("$Sが気に入ったのは$goblinの巣退治だ",
@@ -107,13 +168,17 @@ def sc_quest_goblin(w: World):
                 "それなら許可してくれますか？"),
             rucca.talk("まあ、あなたが一緒というなら戦力的には充分だと認めますが"),
             hero.do("何とか受諾して、$goblin討伐クエストに挑戦することになった"),
+            stage=w.on_guildhead_int,
+            day=w.in_quest3, time=w.at_midmorning,
             )
 
 ## episode
 def ep_quest_goblin(w: World):
     return w.episode("6-1.クエストなう",
+            sc_re_seriousworking(w),
             sc_money_quest(w),
             sc_lessmoney(w),
+            sc_moremoney(w),
             sc_quest_goblin(w),
             ## NOTE
             ##  - 金稼ぎの為にクエストを探す勇者たち

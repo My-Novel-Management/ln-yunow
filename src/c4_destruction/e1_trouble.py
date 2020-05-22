@@ -20,25 +20,61 @@ _ = W.getWho()
 def sc_retry(w: World):
     hero, mako, sol, yula = W(w.hero), W(w.mako), W(w.sol), W(w.yula)
     clerc = W(w.clerc)
+    malta = W(w.malta)
+    inside, outside = W(w.inside), W(w.outside)
     return w.scene("再び仲間とともに",
+            w.comment("ここで毎回同じところに戻ってくるのと同じような手続きを繰り返していると認識してもらう"),
             hero.be("教会で目覚めた"),
+            inside.look("女神像と、教会の内装を目にする"),
+            clerc.be(),
+            malta.be("一番後ろの席で眠りこけている$S"),
             clerc.talk("どうかしましたか？"),
             hero.talk("いや、あの……なんでもないです"),
+            hero.think("またか、と思う"),
             hero.do("$smaphを確認して、そこにゲームの宣伝があるのを見つける",
                 "思わず手が伸びそうになったが、必死に我慢して外に出ていく"),
-            hero.do("家に戻ると$solたちがいた"),
+            hero.go("家に戻る"),
             camera=w.hero,
-            stage=w.on_castletown1,
-            day=w.in_current, time=w.at_afternoon,
+            stage=w.on_church1_int,
+            day=w.in_reset2, time=w.at_afternoon,
+            )
+
+def sc_waitingally(w: World):
+    hero, mako, sol, yula = W(w.hero), W(w.mako), W(w.sol), W(w.yula)
+    inside, outside = W(w.inside), W(w.outside)
+    return w.scene("待ってた仲間たち",
+            hero.come("自宅に戻ってくる"),
+            sol.be(),
+            mako.be(),
+            w.comment("最初から仲間になっている$sol"),
+            hero.explain("そこには二人が待っていた"),
+            sol.talk("おう、$k_hero", "夕食恵んでくれるんだって？",
+                "あとこれ、誰？"),
+            mako.talk("はじめまして、$k_hero"),
+            hero.do("楽しそうに彼女はそう言った"),
+            stage=w.on_herohome_ext,
             )
 
 def sc_meeting(w: World):
     hero, mako, sol, yula = W(w.hero), W(w.mako), W(w.sol), W(w.yula)
+    mam = W(w.mam)
+    inside, outside = W(w.inside), W(w.outside)
     return w.scene("準備会議",
             hero.be(),
-            sol.be(),
             mako.be(),
+            hero.explain("一通り前と同じように問答があったものの、今回$makoはかなりすんなりと引き下がった",
+                "結婚するとか言い出さなかった"),
+            inside.look("$heroの部屋のテーブルには何故か沢山のお菓子が並んでいる"),
+            mako.do("優雅に紅茶を飲みながら座っている"),
+            sol.come("部屋に入ってきて"),
+            sol.talk("いやあ、おまえんちの猫飯最高だな"),
+            sol.talk("それ何食ってんだよ！"),
+            hero.talk("$makoから貰った"),
+            hero.do("$smaphを使いながら"),
+            mako.talk("あげませんよ？"),
+            sol.talk("べ、別にいらねえよ！"),
             sol.talk("で、どうするんだ？"),
+            hero.do("三人で冒険の旅の準備の相談をすることになった"),
             hero.talk("準備を整えるにもとにかく金がいる",
                 "けど$meたちは金がないんだ",
                 "まずはこの問題をどうにかしないといけない"),
@@ -59,11 +95,17 @@ def sc_meeting(w: World):
             mako.talk("ありますよ？"),
             hero.talk("え？"),
             mako.talk("だから金なら$meがいっぱい持ってますって"),
+            stage=w.on_heroroom_int,
+            time=w.at_night,
             )
 
 def sc_richmako(w: World):
     hero, mako, sol, yula = W(w.hero), W(w.mako), W(w.sol), W(w.yula)
+    inside, outside = W(w.inside), W(w.outside)
     return w.scene("$makoは金持ち",
+            hero.be(),
+            sol.be(),
+            mako.be(),
             w.eventPoint("$makoの素性", "$makoは金持ちだと証言"),
             mako.talk("最初に言ったじゃないですか",
                 "$meがいるからお金のことは考えなくていいですって"),
@@ -94,6 +136,7 @@ def sc_richmako(w: World):
 def ep_trouble(w: World):
     return w.episode("4-1.困ったなう",
             sc_retry(w),
+            sc_waitingally(w),
             sc_meeting(w),
             sc_richmako(w),
             ## NOTE

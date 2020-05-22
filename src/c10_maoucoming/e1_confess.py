@@ -20,11 +20,14 @@ _ = W.getWho()
 def sc_makoconfess(w: World):
     hero, mako, sol, yula = W(w.hero), W(w.mako), W(w.sol), W(w.yula)
     maju = W(w.maju)
+    inside, outside = W(w.inside), W(w.outside)
     return w.scene("$makoの告白",
             hero.be(),
             mako.be(),
             sol.be(),
             yula.be(),
+            inside.look("元$goblinの巣である、今は古くなった遺跡",
+                "そこの頂上部分から遠くを眺めやっていた"),
             hero.talk("どういうことなんだ？"),
             hero.do("$makoに説明を求める"),
             mako.talk("$majuというのは、$w_webに集まった人間たちの憎悪が生み出した最悪の$w_majuのことです",
@@ -57,13 +60,14 @@ def sc_makoconfess(w: World):
             mako.talk("これで$meが魔王だって信じてもらえたかな？"),
             sol.do("びびっている$S"),
             camera=w.hero,
-            stage=w.on_castletown1,
-            day=w.in_current, time=w.at_afternoon,
+            stage=w.on_gobruins_ext,
+            day=w.in_birthmaju, time=w.at_afternoon,
             )
 
 def sc_truth(w: World):
     hero, mako, sol, yula = W(w.hero), W(w.mako), W(w.sol), W(w.yula)
     maju = W(w.maju)
+    inside, outside = W(w.inside), W(w.outside)
     return w.scene("この世界の真実",
             hero.be(),
             mako.be(),
@@ -89,6 +93,7 @@ def sc_truth(w: World):
 def sc_rebuilding(w: World):
     hero, mako, sol, yula = W(w.hero), W(w.mako), W(w.sol), W(w.yula)
     maju = W(w.maju)
+    inside, outside = W(w.inside), W(w.outside)
     return w.scene("世界を再生すること",
             hero.be(),
             mako.be(),

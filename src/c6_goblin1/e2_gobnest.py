@@ -17,10 +17,42 @@ _ = W.getWho()
 
 
 ## scenes
+def sc_saving(w: World):
+    hero, mako, sol, yula = W(w.hero), W(w.mako), W(w.sol), W(w.yula)
+    clerc, malta = W(w.clerc), W(w.malta)
+    inside, outside = W(w.inside), W(w.outside)
+    return w.scene("まずは教会で",
+            hero.be(),
+            hero.do("冒険に出る前に教会で祈りを済ませる"),
+            sol.be("外で待っている"),
+            mako.be("同じく外で"),
+            hero.do("出てくる"),
+            hero.talk("さあ、行こうか"),
+            stage=w.on_church1_int,
+            day=w.in_quest4, time=w.at_afternoon,
+            )
+
 def sc_goblinnest(w: World):
     hero, mako, sol, yula = W(w.hero), W(w.mako), W(w.sol), W(w.yula)
     inside, outside = W(w.inside), W(w.outside)
     return w.scene("$goblinの巣",
+            hero.come("荷物を背負い歩いている"),
+            sol.come(),
+            mako.come(),
+            outside.look("初めて見た街道の風景"),
+            outside.look("広々として、そこら中に低木が茂る",
+                "遠方にくつろぐ軟体の野生の魔物がいる"),
+            outside.look("街道は看板が立てられ、地道が伸びている",
+                "城下町のメインストリートのような石畳ではない",
+                "道の脇にぽつりぽつりと石が埋め込まれている"),
+            hero.look("バックパックを背負い、新しい革のブーツ",
+                "王から支給品の剣を腰につけている", "意外と重い"),
+            sol.look("変わらない服装",
+                "赤いぼさぼさ髪をバンダナで巻いて、背中の大剣",
+                "肩にズタ袋を下げている", "そこには寝袋やキャンプ用品"),
+            mako.look("黒の帽子とマント、ピンクの縞模様",
+                "手にはステッキを持っている",
+                "背中に小さなバックパック"),
             hero.do("準備を整えて街道を歩いて目指している$Sたち"),
             hero.talk("$goblinも群れてなきゃ大丈夫なんだよね？"),
             hero.think("大見得きったものの不安な$S"),
@@ -43,11 +75,16 @@ def sc_goblinnest(w: World):
             hero.think("そういえばそうだな、と"),
             hero.do("森に入るところに$goblinがいるのが見えたが、すぐにこちらに気づいて逃げていった"),
             hero.talk("あ、逃げた"),
+            stage=w.on_jihanpath,
             )
 
 def sc_usingsmaph(w: World):
     hero, mako, sol, yula = W(w.hero), W(w.mako), W(w.sol), W(w.yula)
+    inside, outside = W(w.inside), W(w.outside)
     return w.scene("$smaphを使おう",
+            hero.be(),
+            sol.be(),
+            mako.be(),
             sol.talk("まずいな", "あれ、すぐに仲間に連絡してるぞ"),
             hero.talk("ど、どど、どうしよう"),
             mako.talk("こんなときは、これですね"),
@@ -67,11 +104,14 @@ def sc_usingsmaph(w: World):
                 "ボスだけ倒そう",
                 "そうすれば統率とれなくなってみんな逃げ出すだろ？"),
             mako.talk("じゃあ、そういう戦略で"),
+            stage=w.on_jihanforest,
+            day=w.in_quest4, time=w.at_morning,
             )
 
 def sc_intotheforest(w: World):
     hero, mako, sol, yula = W(w.hero), W(w.mako), W(w.sol), W(w.yula)
     gob = W(w.goblin)
+    inside, outside = W(w.inside), W(w.outside)
     return w.scene("森に入る",
             hero.do("$smaphを見ながら、相手があまりいない場所を選んで歩く"),
             sol.talk("$goblinにあまり会わないのはいいけどよ"),
@@ -92,6 +132,7 @@ def sc_intotheforest(w: World):
 def sc_surrounded(w: World):
     hero, mako, sol, yula = W(w.hero), W(w.mako), W(w.sol), W(w.yula)
     gob = W(w.goblin)
+    inside, outside = W(w.inside), W(w.outside)
     return w.scene("囲まれる",
             hero.do("もうすぐボスの位置だ、というところまであまり遭遇せずにきた"),
             hero.do("しかしそこで$makoがいないことに気づく"),
@@ -126,6 +167,7 @@ def sc_surrounded(w: World):
 ## episode
 def ep_goblin_nest(w: World):
     return w.episode("6-2.ゴブリンの巣なう",
+            sc_saving(w),
             sc_goblinnest(w),
             sc_usingsmaph(w),
             sc_intotheforest(w),

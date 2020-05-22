@@ -33,11 +33,14 @@ PERSONS = (
         ("sol", "ソル", "ライガス,ソル", 18, (1,1), "male", "戦士", "me:オレ:k_hero:タロ吉:k_mako:お嬢"),
         ("yula", "ユラ", "サンハイム,ユラ", 25, (1,1),"female", "盗賊", "me:アタシ"),
         ("blacat", "クロ", "", 99,(1,1), "female", "猫"),
+        ("haru", "ハル", "ミゾラ,ハル", 16,(1,1), "female", "お手伝い", "me:わたし:k_hero:タロウさま"),
         ## 町の人々
         ("clerc", "クレルク", "", 45,(1,1), "male", "神官", "me:私"),
         ("dad", "マッシュ", "", 38,(1,1), "male", "英雄", "me:ワシ"),
-        ("mam", "ナターシャ", "", 37,(1,1), "female", "針子", "me:私"),
+        ("mam", "ナターシャ", "", 37,(1,1), "female", "針子", "me:私:k_hero:タロちゃん:k_mako:マコちゃん"),
         ("gando", "ガンド", "", 55,(1,1), "male", "大工", "me:儂"),
+        ("malta", "マルタ", "", 80,(1,1), "female", "機織り", "me:わたしゃ"),
+        ("cedoros", "セドロス", "", 50,(1,1), "male", "現場監督", "me:オレ"),
         ### Web
         ("mania", "タローマニア", "", 30,(1,1), "male", "ファン", "me:拙者"),
         ### 店
@@ -77,25 +80,101 @@ AREAS = (
         # Tag / 名前 / x,y / 備考
         ("Nethgard", "ネスガルド", 1000,1000),
         ("AlJihan", "アル・ジハーン", 1500,1500),
+        ("AJEast", "ジハーン東部", 2000,1800),
+        ("AJWest", "ジハーン西部", 1600,1800),
+        ("AJNorth", "ジハーン北部", 1800,1900),
+        ("AJSouth", "ジハーン南部", 1800,2200),
+        ("InAJCastle", "アル・ジハーン城（城内）", 1800,1800),
         ("Romia", "ローミア", 500,500),
         )
 
 STAGES = (
         # Tag / 名前 / Area / 紹介
-        ## Al-jihan
-        ("castletown1", "ジハーン城下町", "AlJihan"),
-        ("townbar1", "アイーダの酒場", "AlJihan"),
-        ## Romia
-        ("zaban", "ザバン", "Romia"), # ソルの故郷の山村
         ## Common
         ("city", "都市"),
         ("town", "町"),
         ("vila", "村"),
+        ## Al-jihan
+        ("mtjihan", "ジハーン山脈", "AlJihan"),
+        ("neighbor1", "ジハーン近郊", "AlJihan"),
+        ("jihancliff", "ジハーン近郊の崖", "AlJihan"),
+        ("jihanpath", "ジハーン街道", "AlJihan"),
+        ("jihanforest", "ジハーンの森", "AJNorth"),
+        ("goblinnest", "ゴブリンの巣", "AJNorth"),
+        ("gobruins", "ゴブリン遺跡", "AJNorth"),
+        ("nestroom1", "ゴブリンの巣の一室", "AJNorth"),
+        ("nestpath", "ゴブリンの巣の通路", "AJNorth"),
+        ("nesthall", "ゴブリンの巣メインホール", "AJNorth"),
+        ("yulahideout", "ユラの隠れ家", "AJWest"),
+        ### 城下町
+        ("castletown1", "ジハーン城下町", "AlJihan"),
+        ("centralsquare", "中央広場", "AlJihan"),
+        ("townbar1", "アイーダの酒場", "AJWest"),
+        ("church1", "ジハーン教会", "AJEast"),
+        ("herbshop1", "薬草屋", "AJEast"),
+        ("solroom", "ソルの部屋（薬草屋屋根裏）", "AJEast"),
+        ("weaponshop1", "武器屋", "AJEast"),
+        ("herohome", "タロウの家", "AJWest"),
+        ("heroroom", "タロウの部屋", "AJWest"),
+        ("heromansion", "タロウの豪邸", "AJSouth"),
+        ("herobedroom", "タロウの寝室", "AJSouth"),
+        ("herooffice", "タロウの執務室", "AJSouth"),
+        ("guildhead", "ギルド本部", "AlJihan"),
+        ("brostation", "放送局", "AJEast"),
+        ("constfield", "工事現場", "AJWest"),# 砦
+        ("farm1", "農場", "AJSouth"),
+        ### 城内
+        ("audienceroom", "謁見の間", "InAJCastle"),
+        ("hall1", "城の大ホール", "InAJCastle"),
+        ("hall2", "鳳凰の間", "InAJCastle"),
+        ("gate1", "城の大門", "InAJCastle"),
+        ("castleprison", "城の地下牢", "InAJCastle"),
+        ## Romia
+        ("zaban", "ザバン", "Romia"), # ソルの故郷の山村
         )
 
 DAYS = (
         # Tag / 名前 / 月 / 日 / 年
         ("current", "current", 1,1,2020),
+        ## R1
+        ("invite1", "城に呼び出された日", 4,10, 1098),
+        ## R2
+        ("reset1", "死に戻り１回目", 4,10, 1098),
+        ("shopping1", "買い物デイ", 4,11, 1098),
+        ## R3
+        ("reset2", "死に戻り２回目", 4,10, 1098),
+        ("daimaou", "大魔王出現日", 4,11, 1098),
+        ## R4
+        ("reset3", "死に戻り３回目", 4,10, 1098),
+        ("working1", "働こう１日目", 4,11, 1098),
+        ("working2", "働こう２日目", 4,12, 1098),
+        ("working3", "働こう３日目", 4,13, 1098),
+        ("working4", "働こう４日目（配信後１日）", 4,14, 1098),
+        ## R5
+        ("reset4", "死に戻り４回目", 4,10, 1098),
+        ("quest1", "クエスト１日目", 4,11, 1098),
+        ("quest2", "クエスト２日目", 4,12, 1098),
+        ("quest3", "クエスト３日目", 4,15, 1098),
+        ("quest4", "クエスト４日目", 4,16, 1098),
+        ## R6
+        ("reset5", "死に戻り５回目", 4,16, 1098),# ゴブリンクエ前に教会
+        ("questRe1", "再クエスト１日目", 4,17, 1098),
+        ("nextgob", "ゴブリン退治翌日", 4,18, 1098),
+        ("nextslime", "スライム退治翌日", 4,19, 1098),
+        ("request1", "インタビュー依頼日", 4,24, 1098),
+        ("interview1", "インタビュー日１", 4,25, 1098),
+        ("afterbroadcast", "放送後１日目", 4,26, 1098),
+        ("request2", "城から使いが来た日", 4,30, 1098),
+        ("danceball", "舞踏会", 5,3, 1098),
+        ("richman", "金持ちになった", 5,15, 1098),
+        ("richdays", "金持ちの日々１", 6,10, 1098),
+        ("burnout", "炎上日", 6,13, 1098),
+        ("demodays", "デモの日々", 6,15, 1098),
+        ("prison1", "牢獄１日目", 6,15, 1098),
+        ("outprison", "脱獄１日目", 6,16, 1098),
+        ## R7
+        ("reset6", "死に戻り６回目", 6,16, 1098),
+        ("birthmaju", "魔獣誕生日", 6,18, 1098),
         )
 
 TIMES = (
@@ -105,8 +184,10 @@ TIMES = (
 ITEMS = (
         # Tag / 名前 / 紹介
         ("smaph", "スマフ", "携帯電話に似た魔法具"),
+        ("tablet", "タブレ", "スマフの大きな板"),
         ("camera", "キャラメ", "撮影機材。カメラのこと"),
         ("rebuildbox", "リセットの壺", "世界を再生させることのできる壺。しかしそのエネエルギィ源は命である"),
+        ("umark", "勇者のしるし"),
         ## item
         ("herb", "薬草"),
         ## weapon
@@ -114,14 +195,18 @@ ITEMS = (
         ("shortsword", "ショートソード"),
         ("leatherguard", "レザーガード"),
         ## food
-        ("bottlejuice", "ぶどうジュース"),
         ("hotdog", "ホットダック"),
+        ("macaron", "マッカロン", "甘いお菓子"),
+        ## drink
+        ("bottlejuice", "ぶどうジュース"),
         ("milk", "ミルク"),
         )
 
 WORDS = (
         # Tag / 名前 / 紹介
-        ("G", "ゴル", "お金の単位"),
+        ("god", "女神ウィリス"),
+        ("kG", "ゴル", "お金の単位、読み方で"),
+        ("G", "Ｇ", "単位そのまま"),
         ("power", "魔素", "あらゆるもののエネルギィ源"),
         ("paypay", "ポイポイ", "魔素キャッシュ"),
         ("magicitem", "魔道具"),
@@ -130,10 +215,13 @@ WORDS = (
         ("sagawa", "ヤマカワ"),
         ("amazon", "ママゾン"),
         ("web", "ウェーイ部"),
-        ("tweet", "トゥイート"),
+        ("wiki", "イキペディア"),
+        ("tweet", "ツイット"),
+        ("RT", "リツイット"),
         ("msg", "メッセ"),
         ("quest", "クエスト"),
         ("channel", "チャンネル"),
+        ("manual", "トリセツ"),
         ("gazou", "ガゾー"),
         ("douga", "ドーガ"),
         ("wiki", "イキペディア"),

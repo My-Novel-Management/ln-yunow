@@ -22,6 +22,9 @@ def sc_intonest(w: World):
     gob = W(w.goblin)
     inside, outside = W(w.inside), W(w.outside)
     return w.scene("$goblinの巣に突入",
+            hero.be(),
+            sol.be(),
+            mako.be(),
             hero.do("入り口の一つから中に入る$Sたち"),
             inside.look("綺麗に整備された洞窟の中のように、薄暗い",
                 "そこを松明の明かりで進む"),
@@ -41,6 +44,7 @@ def sc_intonest(w: World):
             hero.think("帰ろうかと考え始めていたが、"),
             sol.talk("帰らせちゃくれないようだぜ"),
             hero.do("目の前に松明を手にした$goblinが三匹、にやついていた"),
+            stage=w.on_goblinnest_int,
             )
 
 def sc_vs_goblin(w: World):
@@ -48,6 +52,9 @@ def sc_vs_goblin(w: World):
     gob = W(w.goblin)
     inside, outside = W(w.inside), W(w.outside)
     return w.scene("vs$goblin",
+            hero.be(),
+            sol.be(),
+            mako.be(),
             hero.do("狭くて暗い通路で、前も後ろも$goblinに囲まれている"),
             hero.talk("どうする？"),
             sol.talk("やるしかない"),
@@ -74,8 +81,11 @@ def sc_vs_goblin(w: World):
 def sc_yula(w: World):
     hero, mako, sol, yula = W(w.hero), W(w.mako), W(w.sol), W(w.yula)
     gob = W(w.goblin)
+    inside, outside = W(w.inside), W(w.outside)
     return w.scene("$goblinからカツアゲする盗賊",
             w.symbol("※"),
+            yula.be(),
+            gob.be(),
             yula.do("一方その頃、$Sはある部屋に忍び込んでいた"),
             yula.talk("あんたらこんだけ貯め込んで、どうなるか分かってるんでしょうね？"),
             gob.do("怯える$Sたち"),
@@ -91,8 +101,12 @@ def sc_yula(w: World):
 def sc_joinyula(w: World):
     hero, mako, sol, yula = W(w.hero), W(w.mako), W(w.sol), W(w.yula)
     gob = W(w.goblin)
+    inside, outside = W(w.inside), W(w.outside)
     return w.scene("$yulaが仲間に",
             w.symbol("※"),
+            hero.be(),
+            sol.be(),
+            mako.be(),
             hero.do("松明が消えそうになっている"),
             mako.talk("$meが魔法で明かりつけますよ。ほら"),
             hero.do("明るくなる"),

@@ -20,6 +20,7 @@ _ = W.getWho()
 def sc_destroymaju(w: World):
     hero, mako, sol, yula = W(w.hero), W(w.mako), W(w.sol), W(w.yula)
     maju = W(w.maju)
+    inside, outside = W(w.inside), W(w.outside)
     return w.scene("魔獣による街の破壊",
             hero.be(),
             mako.be(),
@@ -37,6 +38,7 @@ def sc_destroymaju(w: World):
 def sc_mako_desicion(w: World):
     hero, mako, sol, yula = W(w.hero), W(w.mako), W(w.sol), W(w.yula)
     maju = W(w.maju)
+    inside, outside = W(w.inside), W(w.outside)
     return w.scene("$makoの決意",
             mako.talk("あの、それでこの$rebuildboxを使えば、あの$majuが生まれない世界に戻せるんです",
                 "もう二度と生まれない世界にできるんです"),
@@ -65,6 +67,7 @@ def sc_mako_desicion(w: World):
 def sc_heros_idea(w: World):
     hero, mako, sol, yula = W(w.hero), W(w.mako), W(w.sol), W(w.yula)
     maju = W(w.maju)
+    inside, outside = W(w.inside), W(w.outside)
     return w.scene("勇者のアイデア",
             hero.do("黙り込むみんな"),
             sol.talk("あ、潰された"),

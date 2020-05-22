@@ -20,6 +20,7 @@ _ = W.getWho()
 def sc_vanish_mako(w: World):
     hero, mako, sol, yula = W(w.hero), W(w.mako), W(w.sol), W(w.yula)
     clerc = W(w.clerc)
+    inside, outside = W(w.inside), W(w.outside)
     return w.scene("消えた$mako",
             hero.be("教会で目覚める"),
             clerc.be(),
@@ -34,6 +35,7 @@ def sc_vanish_mako(w: World):
 
 def sc_ally(w: World):
     hero, mako, sol, yula = W(w.hero), W(w.mako), W(w.sol), W(w.yula)
+    inside, outside = W(w.inside), W(w.outside)
     return w.scene("仲間たち",
             hero.come("外に出て"),
             sol.be(),
@@ -47,6 +49,7 @@ def sc_ally(w: World):
 
 def sc_lookformako(w: World):
     hero, mako, sol, yula = W(w.hero), W(w.mako), W(w.sol), W(w.yula)
+    inside, outside = W(w.inside), W(w.outside)
     return w.scene("$makoを探す",
             hero.come("叫びながら$makoを探して走り回る"),
             hero.do("しかしどこを探しても彼女はいない", "返事もない"),
@@ -57,6 +60,7 @@ def sc_lookformako(w: World):
 def sc_myhome(w: World):
     hero, mako, sol, yula = W(w.hero), W(w.mako), W(w.sol), W(w.yula)
     mam, dad = W(w.mam), W(w.dad)
+    inside, outside = W(w.inside), W(w.outside)
     return w.scene("家に戻ると父がいた",
             hero.come("自宅に駆け込んでくる"),
             hero.talk("$mako知ってるよね？　うちにきてたストーカーの子！"),
@@ -79,6 +83,7 @@ def sc_no_maou(w: World):
     hero, mako, sol, yula = W(w.hero), W(w.mako), W(w.sol), W(w.yula)
     aida, gans = W(w.aida), W(w.gans)
     bcat = W(w.blacat)
+    inside, outside = W(w.inside), W(w.outside)
     return w.scene("魔王のいない世界",
             hero.be("酒場で子ども用の$bottlejuiceを飲んでいる"),
             sol.be(),
@@ -98,6 +103,7 @@ def sc_no_maou(w: World):
 def sc_message(w: World):
     hero, mako, sol, yula = W(w.hero), W(w.mako), W(w.sol), W(w.yula)
     bcat = W(w.blacat)
+    inside, outside = W(w.inside), W(w.outside)
     return w.scene("$makoのメッセージ",
             hero.come("一人とぼとぼ帰る"),
             bcat.come("彼女には決して懐こうとしなかった黒猫が駆け出てくる"),
@@ -110,6 +116,7 @@ def sc_message(w: World):
 def sc_newadventure(w: World):
     hero, mako, sol, yula = W(w.hero), W(w.mako), W(w.sol), W(w.yula)
     bcat = W(w.blacat)
+    inside, outside = W(w.inside), W(w.outside)
     return w.scene("新たな旅に出発",
             hero.be(),
             sol.be(),

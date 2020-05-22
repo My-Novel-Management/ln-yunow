@@ -19,7 +19,11 @@ _ = W.getWho()
 ## scenes
 def sc_playgame(w: World):
     hero, mako, sol, yula = W(w.hero), W(w.mako), W(w.sol), W(w.yula)
+    inside, outside = W(w.inside), W(w.outside)
     return w.scene("ゲームおもしろい",
+            hero.be("部屋でゲームにはまっている"),
+            hero.explain("画面には楽しそうな絵が出ている",
+                "結構リアルで人形みたいな人間と魔物が動いている"),
             hero.do("何とか準備も整い、明日から旅立とうという夜"),
             hero.do("$Sはベッドに寝転がりながら、ぼんやりと$smaphを眺めていた"),
             hero.do("そこには世界中のあらゆることが投稿されている",
@@ -38,11 +42,15 @@ def sc_playgame(w: World):
             hero.do("初めての魔物との戦闘"),
             hero.do("そこで$Sは初勝利"),
             hero.talk("なんだ、簡単じゃん", "これなら魔王だって余裕で倒せそうだな"),
+            stage=w.on_heroroom_int,
+            time=w.at_night,
             )
 
 def sc_numa(w: World):
     hero, mako, sol, yula = W(w.hero), W(w.mako), W(w.sol), W(w.yula)
+    inside, outside = W(w.inside), W(w.outside)
     return w.scene("ゲームの沼",
+            hero.be(),
             hero.do("しかしすぐに勝てなくなる"),
             hero.do("魔物はどんどん強くなるのに、こちらのレベルは上がらない"),
             hero.talk("なんだよ、これ"),
@@ -71,6 +79,7 @@ def sc_billcollector(w: World):
     hero, mako, sol, yula = W(w.hero), W(w.mako), W(w.sol), W(w.yula)
     geruon = W(w.geruon)
     mam = W(w.mam)
+    inside, outside = W(w.inside), W(w.outside)
     return w.scene("支払いは",
             hero.be("眠りこけている"),
             mako.come(),
@@ -97,19 +106,29 @@ def sc_billcollector(w: World):
             geruon.talk("だからあなたが使った$w_gachaの請求書ですよ",
                 "口座に１$w_Gもないんだから当然全部借金な訳ですよ",
                 "それが支払われないので、$meが来ました"),
+            geruon.look("真っ黒な服の上下で、鋭い目つき",
+                "手にはかっちりした黒い鞄を持っている"),
             hero.do("それは借金の取り立てだった"),
+            stage=w.on_herohome,
             )
 
 def sc_deadend(w: World):
     hero, mako, sol, yula = W(w.hero), W(w.mako), W(w.sol), W(w.yula)
     geruon = W(w.geruon)
+    inside, outside = W(w.inside), W(w.outside)
     return w.scene("借金取り",
-            hero.be(),
+            w.comment("ここがラストの逃げるところで関わってくる場面だといい",
+                "$yulaのアジトが近いとか"),
+            hero.come("逃げてやってくる"),
+            outside.look("林になっているところを抜けた先、",
+                "$on_mtjihanを臨む",
+                "崖が迫る"),
             hero.do("借金取りに追われて、逃げ出す"),
             hero.do("崖に追い詰められる"),
-            geruon.be(),
+            geruon.come(),
             geruon.talk("で、払ってもらえますかね？"),
             hero.do("$Sは追い詰められて、崖から落下した"),
+            stage=w.on_jihancliff,
             )
 
 ## episode

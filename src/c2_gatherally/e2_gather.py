@@ -23,6 +23,11 @@ def sc_re_bar(w: World):
     aida, gans = W(w.aida), W(w.gans)
     return w.scene("再び酒場へ",
             hero.come("$yulaに言われて酒場を訪れた$S"),
+            inside.look("＜酒場外観を簡単に＞",
+                "外に空になった樽が積まれている",
+                "鉄製の看板に店名",
+                "二階がある",
+                "木製で木の板屋根、色は赤く塗られている"),
             hero.do("先程は開いてなかったのに、今は開いているようだ"),
             hero.talk("すみません"),
             gans.be(),
@@ -34,23 +39,39 @@ def sc_re_bar(w: World):
             gans.talk("けど姐さん"),
             aida.talk("どうせまだ客なんざ来ないよ"),
             hero.do("中に入れてもらう"),
+            stage=w.on_townbar1_ext,
+            time=w.at_afternoon,
             )
 
 def sc_barmaster(w: World):
     hero, mako, sol, yula = W(w.hero), W(w.mako), W(w.sol), W(w.yula)
     inside, outside = W(w.inside), W(w.outside)
     aida, gans = W(w.aida), W(w.gans)
+    gando = W(w.gando)
     return w.scene("酒場でからかわれる",
             hero.come(),
             aida.be(),
             gans.be(),
             inside.look("沢山の酒が置かれた棚",
                 "店内は薄暗く、まだ椅子や机の整備がされていない"),
+            inside.look("奥の棚には沢山の酒瓶",
+                "カウンターの上には沢山のグラスを並べて、女が拭いている"),
+            gando.be("酔っ払って寝転がっている"),
+            gando.look("シャツから大きな腹を出して寝ている",
+                "頭頂がはげあがり、鼻の下にひげがある", "中肉の男性"),
+            hero.explain("近所のスクラップ屋のおやじで、父親とも仲良くしていた",
+                "$w_magicitemに強く、魔力こそないが、何かと細工をしては父に試作品を渡していた"),
+            hero.talk("あ、$gandoのおっさん"),
+            gans.talk("ん？　知り合いか、小僧？"),
+            gans.do("睨みつけられるが"),
+            aida.talk("全く、昼間からうちにくるのはろくでなしと決まってるのかい"),
             aida.look("女店主で、妖艶",
                 "胸元が大きく開いた黒や紫基調のドレス",
                 "足を組み替えると腿が目立つ"),
             gans.look("大柄で筋肉質",
                 "片手で樽を軽々担ぎ上げている"),
+            aida.talk("とりあえずそこに座んなよ"),
+            hero.talk("あ、はい"),
             hero.do("座るように言われて、縮こまって座る"),
             hero.do("はじめての酒場にきょろきょろと"),
             aida.talk("で、何か飲むかい？　酒しかないけど"),
@@ -71,6 +92,7 @@ def sc_barmaster(w: World):
                 "で、仲間ってどんなの探してるの？", "多少なら口利きできるよ",
                 "$meらも商売上がったりだからね、あの魔王のせいで"),
             hero.talk("一番強い仲間をお願いします！"),
+            stage=w.on_townbar1_int,
             )
 
 def sc_boysbecry(w: World):

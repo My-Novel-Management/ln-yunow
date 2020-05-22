@@ -19,10 +19,17 @@ _ = W.getWho()
 ## scenes
 def sc_ordertobuster(w: World):
     hero, mako, sol, yula = W(w.hero), W(w.mako), W(w.sol), W(w.yula)
+    mam = W(w.mam)
     arnold = W(w.arnold)
+    inside, outside = W(w.inside), W(w.outside)
     return w.scene("魔王退治を注文する",
+            hero.be(),
             hero.do("翌朝、心地良い目覚めを迎えた"),
             hero.do("冒険に出る心の準備をして、二人を待った"),
+            inside.look("朝日が差し込んでいる部屋",
+                "用意が整ったバックパックが部屋の壁際に置いてある"),
+            inside.look("テーブルの上のお菓子の空が散乱している"),
+            hero.think("それすらも祭りのあとみたいに思えて、微笑む"),
             sol.come(),
             mako.come(),
             hero.do("二人がやってきて、では出発と意気込むが"),
@@ -50,14 +57,29 @@ def sc_ordertobuster(w: World):
             mako.do("$Sも自分の$smaphを注目している"),
             hero.do("そこには一斉に「魔王退治されたって？」という$w_tweetが流れていた"),
             hero.do("そこに城から使いがやってくる"),
+            mam.be(),
+            mam.talk("$k_hero、お客様よ"),
+            arnold.come(),
+            arnold.look("きっちりした制服、詰め襟",
+                "金色の髪の毛が外まきロール"),
             arnold.talk("$hero様、王がお呼びです"),
+            stage=w.on_heroroom_int,
+            day=w.in_daimaou, time=w.at_morning,
             )
 
 def sc_invitecastle(w: World):
     hero, mako, sol, yula = W(w.hero), W(w.mako), W(w.sol), W(w.yula)
     king, lina, mini, arnold = W(w.king), W(w.lina), W(w.minister), W(w.arnold)
     sold = W(w.soldier)
+    inside, outside = W(w.inside), W(w.outside)
     return w.scene("王宮に招かれる",
+            hero.come(),
+            sol.come(),
+            sold.be("沢山の兵士が並んでいる"),
+            inside.look("謁見の間に沢山の人が並ぶ"),
+            sol.do("緊張している"),
+            sol.talk("$me、城なんて入ったことないよ"),
+            hero.talk("何緊張してんだよ"),
             hero.do("城へとやってくる$Sたち"),
             hero.do("どうやら本当に魔王が倒されたらしい",
                 "そういう報告があったと説明される"),
@@ -74,6 +96,8 @@ def sc_invitecastle(w: World):
                 "とにかく、これで世界に平和が戻った",
                 "ありがとう"),
             hero.do("$makoの姿はなかった"),
+            stage=w.on_audienceroom,
+            time=w.at_midmorning,
             )
 
 def sc_party(w: World):
@@ -81,11 +105,29 @@ def sc_party(w: World):
     king, lina, mini, arnold = W(w.king), W(w.lina), W(w.minister), W(w.arnold)
     sold = W(w.soldier)
     daimaou = W(w.daimaou)
+    inside, outside = W(w.inside), W(w.outside)
     return w.scene("宴会",
-            hero.do("その夜、城の大ホールでは盛大な宴が開かれた",
+            hero.be(),
+            sol.be(),
+            hero.explain("その夜、城の舞踏会用のホールでは盛大な宴が開かれた",
                 "芸人やアイドル、歌手など、様々な人が呼ばれ、みんなで楽しんだ"),
-            hero.do("$Sは何故か姿を消した$makoのことを気に掛けながらも、",
+            inside.look("鳳凰の間と呼ばれる一番最上クラスのホール",
+                "金や銀を使った意匠を凝らした壁の模様、柱飾り"),
+            sol.talk("$k_makoも来ればよかったのにな"),
+            hero.talk("なんかあれだって、城みたいに人がいっぱいのところは苦手だとか"),
+            hero.do("$Sは$smaphにメッセージを残して消えた$makoのことを気に掛けながらも、",
                 "あてがわれた美人たちに鼻の下を伸ばしている"),
+            inside.look("王様や姫様もいて、賑やか",
+                "沢山の貴族や家臣は壁際に並び、立食と歓談を楽しんでいる"),
+            lina.be(),
+            king.be(),
+            lina.look("淡いピンクのドレス姿で、長い金髪を丁寧に編み込みしてある"),
+            hero.do("姫を見て見とれている",
+                "初めてその顔を見ている"),
+            lina.do("見返して口元を隠して笑っている"),
+            hero.talk("いやあ、かわいいな"),
+            sol.talk("なにデレデレしてんだ？", "$k_makoが怒るぞ"),
+            hero.talk("いやでもさあ"),
             sol.do("$Sは飯をごちそうになっていた"),
             hero.do("と、突然、雷鳴が届く"),
             daimaou.voice("$meは$S",
@@ -93,16 +135,23 @@ def sc_party(w: World):
                 "お前ら人間の存在は許さぬ",
                 "これより全てを無に返す作業に入る"),
             hero.do("その声に続いて、悲鳴が上がる"),
-            hero.do("外に出る"),
+            hero.go("外に出る"),
+            stage=w.on_hall2,
+            time=w.at_night,
             )
 
 def sc_daimaou(w: World):
     hero, mako, sol, yula = W(w.hero), W(w.mako), W(w.sol), W(w.yula)
+    inside, outside = W(w.inside), W(w.outside)
     return w.scene("大魔王",
+            hero.come("街に出てくる"),
+            outside.look("空が真っ暗になっている",
+                "だがそれは大量の飛空型の魔物の姿だと気づく"),
             hero.do("街に出ると、そこかしこで人が襲われていた"),
             hero.do("大魔王が現れて、空から大量の魔物が襲いかかってくる"),
             hero.do("地上のあちこちで死霊が湧き出し、人々は発狂して逃げ惑った"),
             hero.do("こうして世界は闇に葬り去られた"),
+            stage=w.on_castletown1,
             )
 
 ## episode

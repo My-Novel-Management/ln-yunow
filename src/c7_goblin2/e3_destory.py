@@ -20,7 +20,11 @@ _ = W.getWho()
 def sc_yula(w: World):
     hero, mako, sol, yula = W(w.hero), W(w.mako), W(w.sol), W(w.yula)
     gob = W(w.goblin)
+    inside, outside = W(w.inside), W(w.outside)
     return w.scene("$yulaを仲間に誘う",
+            hero.be(),
+            sol.be(),
+            yula.be(),
             yula.talk("あんたら何してんのさ？"),
             hero.talk("$yulaさんは何してるんですか？"),
             yula.talk("$meはね……"),
@@ -38,6 +42,7 @@ def sc_yula(w: World):
             yula.do("$Sは$smaphで位置情報を見せると、どんどん離れていっている"),
             yula.talk("さらわれたか"),
             hero.talk("え？"),
+            stage=w.on_nestroom1_int,
             )
 
 def sc_rescuemako(w: World):
@@ -45,6 +50,9 @@ def sc_rescuemako(w: World):
     gob = W(w.goblin)
     inside, outside = W(w.inside), W(w.outside)
     return w.scene("$makoを救出へ",
+            hero.come(),
+            sol.come(),
+            yula.come(),
             hero.do("$yulaを仲間にして、奥へと進んでいく"),
             yula.talk("$meは危なくなったらすぐ逃げるから", "いい？"),
             sol.talk("逃げようってときには既に囲まれてるぞ、どうせ"),
@@ -60,14 +68,23 @@ def sc_rescuemako(w: World):
             yula.talk("さっさと先に行くわよ"),
             yula.do("ランタンを持った$yulaを先頭に進んでいく"),
             hero.do("やがて広い空間に出た"),
+            stage=w.on_nestpath,
             )
 
 def sc_surrounded(w: World):
     hero, mako, sol, yula = W(w.hero), W(w.mako), W(w.sol), W(w.yula)
     gob = W(w.goblin)
     hob = W(w.hobgoblin)
+    inside, outside = W(w.inside), W(w.outside)
     return w.scene("囲まれる",
+            hero.come(),
+            sol.come(),
+            yula.come(),
+            mako.be(),
+            hob.be(),
             hero.talk("あ、いた"),
+            inside.look("巨大な水槽みたいなものがある",
+                "天井が高く、ところどころに火が灯されている"),
             hero.do("巨大な水槽のようなものの前に、$hobgoblinと$makoがいる",
                 "その周囲には他の$goblinはいない",
                 "囚われているようには見えない"),
@@ -85,13 +102,21 @@ def sc_surrounded(w: World):
             sol.do("見れば一人で階段を降りていき、向かっている"),
             yula.talk("あの子バカなの？"),
             sol.talk("ああ、バカだな"),
+            stage=w.on_nesthall_int,
             )
 
 def sc_negotiation(w: World):
     hero, mako, sol, yula = W(w.hero), W(w.mako), W(w.sol), W(w.yula)
     gob = W(w.goblin)
     hob = W(w.hobgoblin)
+    inside, outside = W(w.inside), W(w.outside)
     return w.scene("交渉する",
+            hero.be(),
+            sol.be(),
+            yula.be(),
+            mako.be(),
+            hob.be(),
+            gob.be(),
             hero.do("$makoたちのところに一人で向かう"),
             hero.talk("$mako！　今助けるよ！"),
             mako.talk("あ……$hero様"),
@@ -122,7 +147,12 @@ def sc_negotiation(w: World):
 def sc_escape(w: World):
     hero, mako, sol, yula = W(w.hero), W(w.mako), W(w.sol), W(w.yula)
     gob = W(w.goblin)
+    inside, outside = W(w.inside), W(w.outside)
     return w.scene("脱出",
+            hero.come(),
+            sol.come(),
+            yula.come(),
+            mako.come(),
             hero.do("急いで崩壊する要塞から逃げ出す$Sたち"),
             hero.talk("なんであんなところで魔法使ったんだよ？"),
             mako.talk("ごめんなさい。つい"),
@@ -135,9 +165,21 @@ def sc_escape(w: World):
 
 def sc_no_reward(w: World):
     hero, mako, sol, yula = W(w.hero), W(w.mako), W(w.sol), W(w.yula)
+    rucca = W(w.rucca)
+    inside, outside = W(w.inside), W(w.outside)
     return w.scene("報酬はない！",
+            hero.come(),
+            sol.come(),
+            mako.come(),
+            yula.come(),
+            rucca.be(),
             hero.do("街に戻り報告したが、大惨事で怒られる"),
+            rucca.talk("何言ってるんですか",
+                "下流域の村や街は大惨事だったんですよ？",
+                "下手したらここも危なかったんですからね！"),
+            hero.explain("押し寄せてくる濁流を必死に魔法部隊や兵士たちが街にくるのを防いだらしい"),
             hero.talk("そんな、報酬なしなんて……"),
+            stage=w.on_guildhead_int,
             )
 
 ## episode

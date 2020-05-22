@@ -19,13 +19,18 @@ _ = W.getWho()
 ## scenes
 def sc_fakenews(w: World):
     hero, mako, sol, yula = W(w.hero), W(w.mako), W(w.sol), W(w.yula)
+    inside, outside = W(w.inside), W(w.outside)
     return w.scene("フェイクニュース",
             hero.be(),
             mako.be(),
             sol.be(),
             yula.be(),
-            hero.do("豪邸での暮らし"),
+            hero.do("豪邸での暮らすようになって半月ほど、"),
             hero.do("お手伝いをはべらせ、玉座とまごう豪華な椅子に座っている"),
+            inside.look("豪華な寝室",
+                "床は絨毯が敷かれている",
+                "大きなモニタには放送が流れている",
+                "特注の$tabletがある"),
             hero.talk("これまっずいな", "次"),
             hero.do("お手伝いが次々に各地の産物を差し出す"),
             yula.talk("$hero様、お仕事の予定ですが"),
@@ -48,15 +53,22 @@ def sc_fakenews(w: World):
                 "そこには『勇者の悪事まとめ』とあった"),
             yula.think("どうせやっかみだろうと、無視して削除する"),
             camera=w.hero,
-            stage=w.on_castletown1,
-            day=w.in_current, time=w.at_afternoon,
+            stage=w.on_heromansion_int,
+            day=w.in_richdays, time=w.at_afternoon,
             )
 
 def sc_worker(w: World):
     hero, mako, sol, yula = W(w.hero), W(w.mako), W(w.sol), W(w.yula)
+    cedo = W(w.cedoros)
+    inside, outside = W(w.inside), W(w.outside)
     return w.scene("労働者",
-            mako.do("一方$Sは$heroと決別した$solに会いに来ていた"),
+            w.symbol("　　　　※"),
+            mako.come("一方$Sは$heroと決別した$solに会いに来ていた"),
+            sol.be(),
+            cedo.be(),
             mako.talk("あ、いた"),
+            cedo.talk("おーい！　危ないから勝手に入んな！"),
+            sol.talk("あー、親方すんません", "$meの知人すわ"),
             mako.do("$solは今までみたいに土木作業で汗を流していた"),
             sol.talk("おう、$k_makoか", "何度誘っても無駄だから",
                 "$meはな、ああいうくっちゃべったりしてるだけで金が湧いてくるみたいなのは好きじゃねえんだ",
@@ -71,13 +83,18 @@ def sc_worker(w: World):
             mako.talk("嫉妬とかだと思うんですけど、でもこれは"),
             mako.do("そこにはゴブリンと仲良さそうに話したりしている勇者の映像が出回っていた"),
             sol.talk("どういうことだ？"),
+            stage=w.on_constfield,
             )
 
 def sc_burnout(w: World):
     hero, mako, sol, yula = W(w.hero), W(w.mako), W(w.sol), W(w.yula)
+    inside, outside = W(w.inside), W(w.outside)
     return w.scene("動画炎上",
+            hero.come("自宅に戻ってくる"),
             hero.do("ある日のことだった"),
             hero.talk("ん？　何だ？"),
+            outside.look("大きな門扉、そこの前に大量のゴミ",
+                "壁にも落書きがある"),
             hero.do("自宅に戻ってきた$Sは玄関先にゴミをぶちまけられているのを見た"),
             hero.talk("何だこれは？"),
             yula.talk("すぐに片付けさせます"),
@@ -97,12 +114,26 @@ def sc_burnout(w: World):
             mako.do("自分の$smaphを見せて説明する"),
             _.talk("$Sが魔王ということにされているんですよ"),
             hero.talk("え？　$me魔王じゃないよ？"),
+            stage=w.on_heromansion_ext,
+            day=w.in_burnout, time=w.at_afternoon,
             )
 
 def sc_Iammao(w: World):
     hero, mako, sol, yula = W(w.hero), W(w.mako), W(w.sol), W(w.yula)
+    haru = W(w.haru)
+    inside, outside = W(w.inside), W(w.outside)
     return w.scene("自分が魔王？",
-            mako.do("$heroに説明する"),
+            hero.be(),
+            mako.be(),
+            haru.be(),
+            inside.look("執務室",
+                "沢山の革製の本が並ぶ本棚",
+                "マホガニーのどっしりした執務机"),
+            mako.do("$heroに説明しているが、気になって仕方ない"),
+            mako.talk("あの、これ誰なんですか？"),
+            haru.talk("お手伝いの$Sです"),
+            hero.talk("ああ、身の回りの世話を頼んでいるんだ。気にしないで"),
+            mako.think("むちゃくちゃ気になるが仕方なく"),
             w.eventPoint("フェイク動画", "前に$heroに恨みを持った職人が作った"),
             mako.talk("たぶん人気に嫉妬した誰かが作ったんです"),
             hero.do("動画には沢山の文句が書かれている"),
@@ -120,6 +151,7 @@ def sc_Iammao(w: World):
             hero.do("しかし誰も聞く耳もたない"),
             hero.talk("あー、くそ"),
             hero.do("部屋に逃げ込む"),
+            stage=w.on_herooffice_int,
             )
 
 ## episode

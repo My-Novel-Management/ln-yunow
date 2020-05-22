@@ -22,7 +22,19 @@ def sc_broadcast(w: World):
     kiyoe = W(w.kiyoe)
     inside, outside = W(w.inside), W(w.outside)
     return w.scene("番組放送",
-            hero.come("放送局にやってくる"),
+            stage=w.on_brostation_ext,
+            day=w.in_interview1, time=w.at_midmorning,
+            )
+
+def sc_broadcast2(w: World):
+    hero, mako, sol, yula = W(w.hero), W(w.mako), W(w.sol), W(w.yula)
+    kiyoe = W(w.kiyoe)
+    inside, outside = W(w.inside), W(w.outside)
+    return w.scene("番組放送",
+            hero.come("放送局に一人でやってくる"),
+            inside.look("綺麗に内装がされている",
+                "石造りの貴族の別荘がレンタルにされているもの"),
+            hero.do("受付の女性から入館証をもらって、緊張気味に入っていく"),
             hero.talk("へー、ここで番組作ってんのか"),
             inside.look("きっちりと組まれた石ブロックの通路を進む"),
             kiyoe.talk("お待ちしてました",
@@ -37,12 +49,17 @@ def sc_broadcast(w: World):
             hero.think("$solたちも来ればよかったのに、と思っている"),
             kiyoe.talk("じゃあ、段取りを説明していきますね"),
             hero.do("こうして番組の準備が始まった"),
+            stage=w.on_brostation_int,
             )
 
 def sc_popularman(w: World):
     hero, mako, sol, yula = W(w.hero), W(w.mako), W(w.sol), W(w.yula)
     kiyoe = W(w.kiyoe)
+    inside, outside = W(w.inside), W(w.outside)
     return w.scene("人気者に",
+            hero.be(),
+            sol.be(),
+            mako.be(),
             hero.do("配信を何度も繰り返して見ている$S"),
             sol.talk("もう見たろ？", "いい加減にしとけよ"),
             hero.talk("いいだろ、何度見たってさ",
@@ -72,17 +89,23 @@ def sc_popularman(w: World):
             hero.talk("ああ、じゃあ、お願いします"),
             sol.talk("なんでだよ！"),
             hero.do("こうして近所まででかけては弱いモンスターを退治するという企画がスタートした"),
+            stage=w.on_heroroom_int,
+            day=w.in_afterbroadcast, time=w.at_afternoon,
             )
 
 def sc_invitation(w: World):
     hero, mako, sol, yula = W(w.hero), W(w.mako), W(w.sol), W(w.yula)
     arnold = W(w.arnold)
+    inside, outside = W(w.inside), W(w.outside)
     return w.scene("招待状",
-            hero.do("家に戻ってきて、荒い息"),
+            hero.come("家に戻ってきて、荒い息"),
             hero.talk("なんでクエストでもないのにモンスター退治してるんだろう"),
+            sol.come(),
+            mako.be(),
             sol.talk("$k_heroが自分で蒔いた種だろ！",
                 "お陰でこっちはひどい目だ"),
-            arnold.come("城から使いがやってくる"),
+            mako.talk("おかえりなさいませ！"),
+            arnold.come("そこに城から使いがやってくる"),
             arnold.look("上質な仕立ての黒を貴重にした服"),
             arnold.talk("あなたが$heroさんですね？"),
             hero.talk("誰？"),
@@ -91,12 +114,15 @@ def sc_invitation(w: World):
                 "それを伝えに参りました",
                 "参加していただけますね？"),
             hero.do("城からの招待状を見せられた"),
+            stage=w.on_herohome_int,
+            day=w.in_request2, time=w.at_afternoon,
             )
 
 ## episode
 def ep_popular(w: World):
     return w.episode("8-2.人気者なう",
             sc_broadcast(w),
+            sc_broadcast2(w),
             sc_popularman(w),
             sc_invitation(w),
             ## NOTE

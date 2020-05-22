@@ -68,12 +68,15 @@ def sc_party(w: World):
             hero.do("即座に断られて苦笑"),
             sol.talk("あいつ、何やってんだ"),
             sol.do("$Sはとにかくご飯を食べていた"),
+            stage=w.on_hall2_int,
+            day=w.in_danceball, time=w.at_night,
             )
 
 def sc_changing(w: World):
     hero, mako, sol, yula = W(w.hero), W(w.mako), W(w.sol), W(w.yula)
     inside, outside = W(w.inside), W(w.outside)
     return w.scene("人生の転機",
+            hero.be(),
             hero.do("それからは更に忙しくなった"),
             inside.look("部屋は散乱状態で、資料やらが散らばっている"),
             yula.talk("ちょっとこれ何なのよ"),
@@ -100,7 +103,17 @@ def sc_population(w: World):
     kiyoe = W(w.kiyoe)
     inside, outside = W(w.inside), W(w.outside)
     return w.scene("勇者大人気",
+            hero.be(),
             hero.do("人気者になり、豪邸を借りてそこに移り住んだ"),
+            inside.look("豪邸",
+                "貴族が売りに出していたものを借りた"),
+            inside.look("絨毯が敷かれた通路、",
+                "バルコニーがある",
+                "三階建て",
+                "部屋数は二十を超える"),
+            inside.look("執務室には豪華な机に本棚",
+                "革の本が並ぶ、それは金持ちの証明"),
+            hero.do("それを$w_gazouに収める$S"),
             mam.talk("あんたのお陰でまさかこんな場所に住めるようになるなんて！",
                 "これであの人さえ帰ってきてくれたら"),
             hero.talk("一応それ、局の人に頼んで探してもらってるからすぐに見つかると思うよ"),
@@ -116,6 +129,8 @@ def sc_population(w: World):
             hero.talk("冒険はさんざん企画でやってるから、しばらくはいいよ",
                 "あれは仕事だ"),
             mako.talk("そっか"),
+            stage=w.on_heromansion_int,
+            day=w.in_richman, time=w.at_afternoon,
             )
 
 ## episode

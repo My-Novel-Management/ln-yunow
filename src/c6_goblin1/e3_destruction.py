@@ -19,7 +19,11 @@ _ = W.getWho()
 ## scenes
 def sc_runaway(w: World):
     hero, mako, sol, yula = W(w.hero), W(w.mako), W(w.sol), W(w.yula)
+    inside, outside = W(w.inside), W(w.outside)
     return w.scene("逃げろ",
+            hero.be(),
+            sol.be(),
+            hero.explain("二人で逃げ出す相談"),
             hero.talk("逃げよう"),
             sol.talk("は？　どうやって？"),
             hero.talk("わかんないけど……あ、いや、これ今こっちに集まってるから、",
@@ -33,10 +37,12 @@ def sc_runaway(w: World):
             sol.do("目の前$goblinを殴りつけておいて、背を向けて逃げ出す"),
             hero.do("$Sも武器が引き抜けないながら、慌てて後を追う"),
             hero.do("森の中をとにかく逃げていく$Sたち"),
+            stage=w.on_jihanforest,
             )
 
 def sc_no_wayout(w: World):
     hero, mako, sol, yula = W(w.hero), W(w.mako), W(w.sol), W(w.yula)
+    inside, outside = W(w.inside), W(w.outside)
     return w.scene("逃げ道がない",
             hero.do("多いところを避けて、とにかく森から出ようと走る"),
             sol.talk("おい、$k_hero！", "今度はどっちだ！"),
@@ -64,6 +70,7 @@ def sc_no_wayout(w: World):
 
 def sc_gotolake(w: World):
     hero, mako, sol, yula = W(w.hero), W(w.mako), W(w.sol), W(w.yula)
+    inside, outside = W(w.inside), W(w.outside)
     return w.scene("湖に飛び込め",
             hero.do("何とか無理矢理に言いくるめて、湖の方に逃げる$S"),
             sol.talk("$meが溺れ死んだら一生お前を恨んでやるからな！"),
