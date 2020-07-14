@@ -1,81 +1,81 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""Main story.
 """
-## path
+Main story
+==========
+"""
 import os
 import sys
 sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
 sys.path.append('storybuilder')
-## local libs
 from storybuilder.builder.world import World
-from storybuilder.builder.writer import Writer
-## assets
-from storybuilder.assets import basic, accessory
-## settings
-from src.config import PERSONS, AREAS, STAGES, DAYS, TIMES, ITEMS, WORDS, RUBIS, LAYERS
-## local files
-from src.c1_iamhero.main import ch01
-from src.c2_gatherally.main import ch02
-from src.c3_preparation.main import ch03
-from src.c4_destruction.main import ch04
-from src.c5_adv_channel.main import ch05
-from src.c6_goblin1.main import ch06
-from src.c7_goblin2.main import ch07
-from src.c8_popularman.main import ch08
-from src.c9_burnout.main import ch09
-from src.c10_maoucoming.main import ch10
+from storybuilder.assets import basic
+from storybuilder.assets import common_rubi
+from config import ASSET
+# import scenes
 
-## define alias
-W = Writer
 
 ################################################################
-##  章構成
-##  1. 勇者なう
-##  2. 仲間なう
-##  3. 準備なう
-##  4. 全滅なう
-##  5. 冒険チャンネルなう
-##  6. ゴブリンの巣なう・その１
-##  7. ゴブリンの巣なう・その２
-##  8. 人気者なう
-##  9. 炎上なう
-##  10. 魔王なう
+#
+#   1. Initialize
+#   2. Story memo
+#   3. Structure    - 1/8: 1K * 10
+#   4. Spec
+#   5. Plot         - 1/4: 2.5K * 10
+#   6. Scenes
+#   7. Conte        - 1/2: 5K * 10
+#   8. Layout
+#   9. Draft        - 1/1: 10K * 10
+#
 ################################################################
 
 
-## main
-def create_world():
-    """Create a world.
-    """
-    w = World("勇者なう！")
-    w.setCommonData()
-    w.setAssets(basic.ASSET)
-    w.setAssets(accessory.ASSET)
-    w.buildDB(PERSONS,
-            AREAS, STAGES, DAYS, TIMES, ITEMS, WORDS,
-            RUBIS, LAYERS)
-    w.setBaseDate(1020)
-    w.setBaseArea("Nethgard")
-    # set persons
-    # set stages
-    # set blocks
-    w.setOutline("スマフと呼ばれる魔法具を手に入れた勇者はそれを使って魔王退治に繰り出すはずだったが、何故か魔物たちに取り囲まれてしまう")
-    return w
+# Constant
+TITLE = "勇者なう"
+MAJOR, MINOR, MICRO = 2, 2, 0
+COPY = "勇者はスマフを手に入れた！"
+ONELINE = "色々なアプリが使えるスマフという魔道具を使い、魔王を見つけて退治すべく奮闘する勇者とその仲間たちの冒険譚"
+OUTLINE = "お城に呼び出されたタロウはスマフを貰い、勇者の称号を授けられる。魔王退治を命じられたタロウはスマフを駆使して仲間と共に冒険の旅に出ようとするが"
+THEME = "便利な道具を使っても、自分で努力しないと目的は達成されない"
+GENRE = "ファンタジィ"
+TARGET = "10-20台（男）"
+SIZE = "100K"
+CONTEST_INFO = ""
+CAUTION = ""
+NOTE = ""
+SITES = ["エブリスタ", "小説家になろう", "ノベルアッププラス", "カクヨム"]
+RELEASED = (7, 12, 2020)
+
+
+# Note
+def abstract(w: World):
+    return w.writer_note("概要",
+            "お城に呼ばれ、スマフと呼ばれる魔道具を与えられ、勇者の称号を得た若者は魔王退治を命じられる",
+            "$heroは言われたように仲間を集めて冒険の旅に出ようとするが、様々なアプリの誘惑に負け、またそれが災難を呼び、何度も死ぬことになる",
+            )
+
 
 def main(): # pragma: no cover
-    w = create_world()
-    return w.build(
-            ch01(w),
-            ch02(w),
-            ch03(w),
-            ch04(w),
-            ch05(w),
-            ch06(w),
-            ch07(w),
-            ch08(w),
-            ch09(w),
-            ch10(w),
+    w = World.create_world(f"{TITLE}")
+    w.config.set_version(MAJOR, MINOR, MICRO)
+    w.db.set_from_asset(basic.ASSET)
+    w.db.set_from_asset(common_rubi.ASSET)
+    w.db.set_from_asset(ASSET)
+    # spec
+    w.config.set_copy(f"{COPY}")
+    w.config.set_oneline(f"{ONELINE}")
+    w.config.set_outline(f"{OUTLINE}")
+    w.config.set_theme(f"{THEME}")
+    w.config.set_genre(f"{GENRE}")
+    w.config.set_target(f"{TARGET}")
+    w.config.set_size(f"{SIZE}")
+    w.config.set_contest_info(f"{CONTEST_INFO}")
+    w.config.set_caution(f"{CAUTION}")
+    w.config.set_note(f"{NOTE}")
+    w.config.set_sites(*SITES)
+    w.config.set_released(*RELEASED)
+    return w.run(
+            abstract(w),
             )
 
 

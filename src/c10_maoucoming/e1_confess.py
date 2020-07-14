@@ -22,16 +22,55 @@ def sc_makoconfess(w: World):
     maju = W(w.maju)
     inside, outside = W(w.inside), W(w.outside)
     return w.scene("$makoの告白",
-            hero.be(),
+            hero.be("$goblin遺跡の見張り台から、遠くの土煙を眺めていた"),
             mako.be(),
             sol.be(),
             yula.be(),
+            outside.look("遠くの景色",
+                "南側の港の方、海の上に現れたゴジラよろしく巨大な魔物の姿",
+                "空は暗い（夕方）"),
             inside.look("元$goblinの巣である、今は古くなった遺跡",
                 "そこの頂上部分から遠くを眺めやっていた"),
             hero.talk("どういうことなんだ？"),
-            hero.do("$makoに説明を求める"),
-            mako.talk("$majuというのは、$w_webに集まった人間たちの憎悪が生み出した最悪の$w_majuのことです",
-                "あれが生まれたら、もうこの世界は終わったも同然なんです"),
+            hero.look("変装のために着ていた兵士の服装から、兜を脱ぎ捨て、甲冑だけになっている$S"),
+            hero.do("あれを『$maju』と呼んだ$makoに説明を求める"),
+            hero.do("$makoを見た"),
+            mako.look("普段の黒ずくめとは異なり、変装で街の花売りに扮していたので、金髪のウィッグにミニスカート、タイツというエロ可愛い感じ"),
+            mako.do("いつもみたいな子供っぽい喋り方ではなく、真面目なトーンで大人の話し方をする$S"),
+            mako.talk("$majuというのは$w_webに集まった人間たちの憎悪が生み出した最悪の$w_majuのことで、",
+                "この$smaphを人間界に配ったのも、あれを生み出すのが目的だったんです",
+                "あれは世界を滅ぼす最終兵器なんですよ"),
+            sol.talk("なんで$k_makoはそんなになんでもかんでも知ってるんだよ",
+                "まさか本当に本物の魔王だとか、そんなこと言い出すんじゃないだろうな？"),
+            mako.do("何故か黙り込む$S"),
+            sol.talk("お、おい", "冗談だろ？", "なんで黙んだよ？",
+                "$meたちが探してた魔王がすぐそばで、しかも仲間だったとか、しゃれにもならねえぜ？"),
+            yula.talk("ちょっとー、何話してんのよ？",
+                "$meも上がってっていいの？"),
+            mako.talk("とにかく、一旦部屋に戻りましょうか"),
+            mako.do("いつもとは全然違う調子で言った"),
+            camera=w.hero,
+            stage=w.on_gobtower,
+            day=w.in_birthmaju, time=w.at_evening,
+            )
+
+def sc_confess2(w: World):
+    hero, mako, sol, yula = W(w.hero), W(w.mako), W(w.sol), W(w.yula)
+    maju = W(w.maju)
+    inside, outside = W(w.inside), W(w.outside)
+    return w.scene("魔王の告白",
+            hero.come("はしごから降りてくる"),
+            mako.come(),
+            sol.come(),
+            yula.be(),
+            yula.do("戻ってきたみんなの様子が変と気づく"),
+            yula.talk("何よ？　その$majuってのがどうかしたの？"),
+            yula.do("$smaphには沢山の$w_tweetがあり、そこに魔獣の$w_gazouが投稿されていた"),
+            hero.talk("なあ$mako", "さっき言ったことは、本当なのか？"),
+            sol.talk("$k_mako！", "$meたちに分かるようにちゃんと説明してくれ！",
+                "でないと$meは……$meはお前を、許せねえ！"),
+            yula.talk("何があったのよ……"),
+            # TODO
             sol.talk("なんでよ？", "魔王よりも怖いのか？"),
             mako.talk("魔王なんて、全然です", "あれは本物の最悪なんです",
                 "そもそも、$smaphはあれを生み出すために作られたんです"),
@@ -59,9 +98,8 @@ def sc_makoconfess(w: World):
             mako.do("光の弾で消してしまう"),
             mako.talk("これで$meが魔王だって信じてもらえたかな？"),
             sol.do("びびっている$S"),
-            camera=w.hero,
-            stage=w.on_gobruins_ext,
-            day=w.in_birthmaju, time=w.at_afternoon,
+            stage=w.on_gobtowroom_int,
+            time=w.at_night,
             )
 
 def sc_truth(w: World):
@@ -112,6 +150,7 @@ def sc_rebuilding(w: World):
 def ep_confess(w: World):
     return w.episode("10-1.魔子の告白",
             sc_makoconfess(w),
+            sc_confess2(w),
             sc_truth(w),
             sc_rebuilding(w),
             ## NOTE

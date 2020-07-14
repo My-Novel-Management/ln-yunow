@@ -18,10 +18,12 @@ install:
     - pip install coveralls
     - pip install python-dateutil
     - pip install mecab-python3
+    - pip install unidic-lite
 
 script:
     - coverage run --parallel-mode --rcfile=.coveragerc setup.py test
-    - coverage run --parallel-mode --rcfile=.coveragerc src/main.py --forcemecab
+    - coverage run --parallel-mode --rcfile=.coveragerc src/main.py --rubi
+    - coverage run --parallel-mode --rcfile=.coveragerc src/main.py --text --plot --data --rubi
 
 after_success:
     - coverage combine
